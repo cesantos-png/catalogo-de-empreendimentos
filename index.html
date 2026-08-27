@@ -288,7 +288,7 @@ async function applyLogo(){
   const logoSlot = document.getElementById('logoSlot');
   const url = normalizePhotoUrl(LOGO_IMAGE_URL);
   if(url && await preloadImage(url)){
-    logoSlot.innerHTML = `<img src="${url}" alt="Logo Atlantica" style="height:36px;max-width:220px;object-fit:contain;">`;
+    logoSlot.innerHTML = `<img src="${url}" alt="Logo Atlantica" style="height:44px;width:auto;object-fit:contain;">`;
   }else{
     logoSlot.innerHTML = defaultLogoHtml();
   }
