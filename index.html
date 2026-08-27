@@ -45,16 +45,9 @@
   .searchbox input{width:100%;padding:10px 14px 10px 38px;border-radius:999px;border:none;background:#33415a;color:#fff;font-size:14px;}
   .searchbox input::placeholder{color:#9fadc0;}
   .searchbox svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.6;width:15px;height:15px;}
-  .edit-toggle{margin-left:auto;font-size:12.5px;color:#9fadc0;background:none;border:1px solid #3b4a63;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:.15s;}
-  .edit-toggle:hover{color:#fff;border-color:var(--orange-dark);}
-  .edit-toggle.active{background:var(--orange-dark);border-color:var(--orange-dark);color:#fff;}
 
   /* ---------- HERO ---------- */
   .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 55%,var(--navy-2) 100%);color:#fff;padding:64px 24px 56px;}
-  .hero-stripes{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
-  .hero-stripes .bar{position:absolute;top:-10%;height:130%;width:64px;transform:skewX(-37deg);}
-  .hero-stripes .bar.b1{right:180px;background:var(--orange-dark);}
-  .hero-stripes .bar.b2{right:90px;background:var(--blue-light);opacity:.9;}
   .hero-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;font-weight:600;color:var(--orange-light);text-transform:uppercase;margin-bottom:18px;}
   .eyebrow::before{content:"";width:14px;height:20px;background:var(--orange-dark);transform:skewX(-37deg);display:inline-block;flex-shrink:0;}
@@ -104,14 +97,6 @@
   .btn{border:none;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;text-align:center;}
   .btn-primary{background:var(--navy);color:#fff;flex:1;}
   .btn-primary:hover{background:var(--navy-2);}
-  .btn-ghost{background:#fff;border:1.4px solid var(--gray-light);color:var(--navy);}
-  .btn-ghost:hover{border-color:var(--orange-dark);}
-  .icon-btn{width:34px;height:34px;border-radius:8px;border:1.4px solid var(--gray-light);background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;}
-  .icon-btn.danger:hover{border-color:#d9534f;background:#fdf1f0;}
-  .icon-btn:hover{border-color:var(--orange-dark);}
-
-  .manage-link{position:fixed;bottom:26px;left:26px;background:#fff;border:1.5px solid var(--gray-light);color:var(--navy);border-radius:999px;padding:12px 18px;font-weight:600;font-size:13px;box-shadow:var(--shadow);z-index:30;}
-  .manage-link:hover{border-color:var(--orange-dark);}
 
   /* ---------- MODAL ---------- */
   .overlay{position:fixed;inset:0;background:rgba(20,26,36,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;}
@@ -130,76 +115,23 @@
   .detail-stat b{display:block;font-family:'Outfit',sans-serif;font-size:19px;}
   .detail-stat span{font-size:10.5px;color:var(--gray-dark);}
   .detail-amenities{display:flex;flex-wrap:wrap;gap:8px;}
-
-  /* form */
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-  .field{display:flex;flex-direction:column;gap:5px;}
-  .field.full{grid-column:1/-1;}
-  .field label{font-size:12px;font-weight:600;color:var(--gray-dark);}
-  .field input,.field select{padding:9px 11px;border:1.5px solid var(--gray-light);border-radius:8px;font-size:14px;font-family:inherit;}
-  .field input:focus,.field select:focus{border-color:var(--orange-dark);}
-  .checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
-  .checkbox-item{display:flex;align-items:center;gap:7px;font-size:13.5px;border:1.5px solid var(--gray-light);border-radius:8px;padding:8px 10px;}
-  .checkbox-item input{width:16px;height:16px;flex-shrink:0;}
-  .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;}
   .hint{font-size:12px;color:var(--gray-dark);}
-
-  .amenity-manager-list{display:flex;flex-direction:column;gap:8px;}
-  .amenity-manager-row{display:flex;align-items:center;gap:10px;border:1.5px solid var(--gray-light);border-radius:8px;padding:8px 10px;}
-  .amenity-manager-row .em{font-size:18px;width:26px;text-align:center;}
-  .amenity-manager-row .lb{flex:1;font-size:14px;}
-  .add-amenity-row{display:flex;gap:8px;align-items:flex-end;}
-  .emoji-pick{display:flex;flex-wrap:wrap;gap:6px;max-width:280px;}
-  .emoji-opt{font-size:18px;padding:5px 7px;border:1.5px solid var(--gray-light);border-radius:6px;background:#fff;}
-  .emoji-opt.sel{border-color:var(--orange-dark);background:#fff3ea;}
 
   footer{background:var(--navy);color:#9fadc0;text-align:center;font-size:12.5px;padding:26px 20px;}
   footer b{color:#fff;}
-  .footer-edit-link.active{color:var(--orange-light) !important;}
 
   @media(max-width:640px){
-    .form-grid{grid-template-columns:1fr;}
     .detail-grid{grid-template-columns:repeat(2,1fr);}
     .topbar-inner{flex-wrap:wrap;}
     .searchbox{order:3;max-width:100%;width:100%;}
-    .edit-toggle{margin-left:0;}
-    .manage-link{left:16px !important;bottom:auto;top:16px;font-size:11px;padding:8px 12px;}
-    #manageAmenitiesBtn{top:16px;}
-    #manageVisualBtn{top:62px;}
-    #manageDataBtn{top:108px;}
   }
 </style>
 </head>
 <body>
 
-<!-- Cabeçalho como imagem completa (opcional, substitui tudo abaixo quando preenchido) -->
-<div id="customHeaderBlock" style="display:none;">
-  <img id="customHeaderImg" style="width:100%;display:block;" alt="Cabeçalho Atlantica">
-  <div style="background:var(--navy);padding:12px 24px;">
-    <div class="searchbox" style="max-width:420px;margin:0 auto;">
-      <svg viewBox="0 0 24 24" fill="none" stroke="white"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
-      <input id="searchInput2" type="text" placeholder="Buscar por hotel, cidade ou bandeira...">
-    </div>
-  </div>
-</div>
-
 <div class="topbar" id="topbarEl">
   <div class="topbar-inner">
-    <div class="logo" id="logoSlot">
-      <div class="logo-mark">
-        <svg viewBox="0 0 620 420" fill="none">
-          <rect x="52" y="43" width="517" height="323" rx="95" ry="95" stroke="currentColor" stroke-width="26"/>
-          <polygon points="94,302 135,302 283,106 242,106" fill="currentColor"/>
-          <line x1="323" y1="106" x2="323" y2="302" stroke="currentColor" stroke-width="32"/>
-          <line x1="489" y1="106" x2="489" y2="302" stroke="currentColor" stroke-width="32"/>
-          <line x1="323" y1="204" x2="489" y2="204" stroke="currentColor" stroke-width="32"/>
-        </svg>
-      </div>
-      <div class="logo-text">
-        <b>ATLANTICA</b>
-        <span>HOSPITALITY INTERNATIONAL</span>
-      </div>
-    </div>
+    <div class="logo" id="logoSlot"></div>
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="white"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
       <input id="searchInput" type="text" placeholder="Buscar por hotel, cidade ou bandeira...">
@@ -207,12 +139,11 @@
   </div>
 </div>
 
-<div class="hero" id="heroSection">
-  <div class="hero-stripes" id="heroStripes"><div class="bar b1" id="heroBar1"></div><div class="bar b2" id="heroBar2"></div></div>
+<div class="hero">
   <div class="hero-inner">
     <div class="eyebrow">Catálogo de empreendimentos</div>
-    <h1 id="heroTitleEl">Presentes em todas as regiões do Brasil</h1>
-    <p class="sub" id="heroSubtitleEl">Encontre o empreendimento ideal por região, cidade ou comodidades.</p>
+    <h1>Presentes em todas as regiões do Brasil</h1>
+    <p class="sub">Encontre o empreendimento ideal por região, cidade ou comodidades.</p>
     <div class="stats-row">
       <div class="stat"><b>+165</b><span>empreendimentos</span></div>
       <div class="stat"><b>+25</b><span>anos de mercado</span></div>
@@ -238,42 +169,27 @@
 
 <main id="mainContent"></main>
 
-<button class="manage-link" id="manageAmenitiesBtn" style="display:none;">⚙ Gerenciar comodidades</button>
-<button class="manage-link" id="manageVisualBtn" style="display:none;left:230px;">🎨 Editar visual</button>
-<button class="manage-link" id="manageDataBtn" style="display:none;left:420px;">🔗 Fonte de dados</button>
-
 <!-- DETAIL MODAL -->
 <div class="overlay" id="detailOverlay">
   <div class="modal" id="detailModal"></div>
 </div>
 
-<!-- AMENITY MANAGER MODAL -->
-<div class="overlay" id="amenityOverlay">
-  <div class="modal" id="amenityModal"></div>
-</div>
-
 <footer>
   Catálogo interno · <b>Atlantica Hospitality International</b> · dados mantidos pelo time comercial
-  <div style="margin-top:10px;"><button id="editToggleBtn" class="footer-edit-link" style="background:none;border:none;color:#5a6a80;font-size:11px;cursor:pointer;text-decoration:underline;padding:4px;">acesso da equipe</button></div>
 </footer>
-
-<!-- PASSWORD MODAL -->
-<div class="overlay" id="passwordOverlay">
-  <div class="modal" id="passwordModal" style="max-width:360px;"></div>
-</div>
-
-<!-- CONFIRM MODAL -->
-<div class="overlay" id="confirmOverlay">
-  <div class="modal" id="confirmModal" style="max-width:380px;"></div>
-</div>
 
 <!-- TOAST -->
 <div id="toast" style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13.5px;box-shadow:var(--shadow-lg);z-index:200;opacity:0;pointer-events:none;transition:.2s;"></div>
 
 <script>
+// ---------- CONFIGURAÇÃO (edite aqui direto no código — não há mais painel de edição na página) ----------
 const REGIONS = ["Centro-Oeste","Nordeste","Norte","Sudeste","Sul","Residencial"];
-const EDIT_PASSWORD = "atlantica2026";
-const EMOJI_OPTIONS = ["🏊","🏋️","🅿️","📶","🍽️","🍳","🍸","🐾","♿","🧺","💻","🚲","🏪","💆","🧒","🚐","❄️","🔥","🌊","🛎️","🎉","🧖","🚭","🐕"];
+const LOGO_BRAND = "ATLANTICA";
+const LOGO_SUB = "HOSPITALITY INTERNATIONAL";
+// Aceita link direto de imagem OU link de compartilhamento do Google Drive (convertido automaticamente). Deixe "" para usar a marca padrão (ícone + texto).
+const LOGO_IMAGE_URL = "https://drive.google.com/file/d/1iWvZTgkvZqCzN_al12lrcU9Q0N5w5E1H/view?usp=drive_link";
+// Link publicado como CSV (Google Sheets: Arquivo → Compartilhar → Publicar na Web → formato CSV)
+const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8fug0ecqLbCqiFjlW6A--HpBio6e24IZWclJIo4tVD5I43ep4iKtlL75iocWFQ9k-ozNF5SAMeZN9/pub?gid=1939095860&single=true&output=csv";
 
 const DEFAULT_AMENITIES = [
   {id:"estacionamento", label:"Estacionamento", icon:"🅿️"},
@@ -295,7 +211,7 @@ const DEFAULT_AMENITIES = [
   {id:"lavanderia", label:"Lavanderia", icon:"🧺"},
 ];
 
-// Dados de exemplo, usados apenas enquanto nenhuma planilha estiver conectada (ver "Fonte de dados" no modo de edição)
+// Dados de exemplo, usados apenas enquanto a planilha (SHEET_CSV_URL) ainda não respondeu pela primeira vez
 const FALLBACK_HOTELS = [
   {region:"Centro-Oeste", brand:"Comfort Hotel", name:"Comfort Hotel Goiânia", city:"Goiânia", state:"GO", address:"Av. Dr. Ismerino Soares de Carvalho, 52 - St. Aeroporto, Goiânia - GO", phone:"+55 (62) 3412-1550", email:"reservas.chgo@ahi.com.br", apartments:189, uFormat:30, salas:4, auditorio:90, amenities:[]},
   {region:"Centro-Oeste", brand:"Comfort Hotel & Suites", name:"Comfort Hotel & Suites Rondonópolis", city:"Rondonópolis", state:"MT", address:"Av. Rotary Internacional, 1815 - Vila Aurora Segunda Parte, Rondonópolis - MT", phone:"+55 (66) 3439-5400", email:"reservas.chro@ahi.com.br", apartments:132, uFormat:60, salas:6, auditorio:200, amenities:[]},
@@ -324,30 +240,6 @@ const FALLBACK_HOTELS = [
   {region:"Residencial", brand:"Roomo Transamerica", name:"Roomo Transamerica SP Pinheiros", city:"São Paulo", state:"SP", address:"R. Cunha Gago, 83 - Pinheiros, São Paulo - SP", phone:"+55 (11) 98868-5700", email:"atendimentoresidences@ahi.com.br", apartments:null, uFormat:null, salas:null, auditorio:null, amenities:["coworking","academia","lavanderia","loja_conveniencia","bicicletario","piscina"]},
 ];
 
-const BRAND_COLORS = {
-  "Laranja escuro": "#ed7d31",
-  "Laranja claro": "#ffab7b",
-  "Azul claro": "#00b5e2",
-  "Azul escuro": "#263142",
-  "Cinza escuro": "#6e6e6e",
-  "Cinza claro": "#dbdbd3",
-  "Branco": "#ffffff",
-  "Preto": "#000000"
-};
-
-const SETTINGS_DEFAULT = {
-  fullHeaderImageUrl: "",
-  logoBrand: "ATLANTICA",
-  logoSub: "HOSPITALITY INTERNATIONAL",
-  fullLogoImageUrl: "https://lh3.googleusercontent.com/d/1iWvZTgkvZqCzN_al12lrcU9Q0N5w5E1H",
-  heroTitle: "Presentes em todas as regiões do Brasil",
-  showBars: false,
-  bar1Color: BRAND_COLORS["Laranja escuro"],
-  bar2Color: BRAND_COLORS["Azul claro"],
-  heroBannerUrl: "",
-  sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8fug0ecqLbCqiFjlW6A--HpBio6e24IZWclJIo4tVD5I43ep4iKtlL75iocWFQ9k-ozNF5SAMeZN9/pub?gid=1939095860&single=true&output=csv"
-};
-
 // Colunas esperadas na planilha (cabeçalho na primeira linha), com nomes alternativos aceitos
 const FIELD_ALIASES = {
   region: ["regiao"],
@@ -366,7 +258,13 @@ const FIELD_ALIASES = {
   photoUrl: ["fotourl","foto","linkdafoto","urldafoto"]
 };
 
-let settings = {...SETTINGS_DEFAULT};
+const DEFAULT_MARK_SVG = `<svg viewBox="0 0 620 420" fill="none">
+  <rect x="52" y="43" width="517" height="323" rx="95" ry="95" stroke="currentColor" stroke-width="26"/>
+  <polygon points="94,302 135,302 283,106 242,106" fill="currentColor"/>
+  <line x1="323" y1="106" x2="323" y2="302" stroke="currentColor" stroke-width="32"/>
+  <line x1="489" y1="106" x2="489" y2="302" stroke="currentColor" stroke-width="32"/>
+  <line x1="323" y1="204" x2="489" y2="204" stroke="currentColor" stroke-width="32"/>
+</svg>`;
 
 function preloadImage(url){
   return new Promise(resolve=>{
@@ -378,92 +276,27 @@ function preloadImage(url){
   });
 }
 
-const DEFAULT_MARK_SVG = `<svg viewBox="0 0 620 420" fill="none">
-  <rect x="52" y="43" width="517" height="323" rx="95" ry="95" stroke="currentColor" stroke-width="26"/>
-  <polygon points="94,302 135,302 283,106 242,106" fill="currentColor"/>
-  <line x1="323" y1="106" x2="323" y2="302" stroke="currentColor" stroke-width="32"/>
-  <line x1="489" y1="106" x2="489" y2="302" stroke="currentColor" stroke-width="32"/>
-  <line x1="323" y1="204" x2="489" y2="204" stroke="currentColor" stroke-width="32"/>
-</svg>`;
-
-async function applySettings(){
-  const topbar = document.getElementById('topbarEl');
-  const hero = document.getElementById('heroSection');
-  const customBlock = document.getElementById('customHeaderBlock');
-
-  // ---- Cabeçalho completo como imagem única (substitui tudo: logo, título, barras) ----
-  if(settings.fullHeaderImageUrl){
-    const ok = await preloadImage(settings.fullHeaderImageUrl);
-    if(ok){
-      document.getElementById('customHeaderImg').src = settings.fullHeaderImageUrl;
-      customBlock.style.display = 'block';
-      topbar.style.display = 'none';
-      hero.style.display = 'none';
-      return; // não precisa configurar mais nada do cabeçalho codificado
-    }else{
-      customBlock.style.display = 'none';
-      topbar.style.display = '';
-      hero.style.display = '';
-      if(editMode) showToast('Não consegui carregar a imagem do cabeçalho — mantive o cabeçalho padrão. Confira se o link/arquivo é válido.');
-    }
-  }else{
-    customBlock.style.display = 'none';
-    topbar.style.display = '';
-    hero.style.display = '';
-  }
-
-  document.getElementById('heroTitleEl').textContent = settings.heroTitle;
-
-  // ---- Logo: full custom image OR default mark + text ----
-  const logoSlot = document.getElementById('logoSlot');
-  if(settings.fullLogoImageUrl){
-    const ok = await preloadImage(settings.fullLogoImageUrl);
-    if(ok){
-      logoSlot.innerHTML = `<img src="${settings.fullLogoImageUrl}" alt="Logo Atlantica" style="height:36px;max-width:220px;object-fit:contain;">`;
-    }else{
-      logoSlot.innerHTML = defaultLogoHtml();
-      if(editMode) showToast('Não consegui carregar a imagem da logo — mantive a marca padrão. Confira se o link é público e direto para a imagem.');
-    }
-  }else{
-    logoSlot.innerHTML = defaultLogoHtml();
-  }
-
-  // ---- Hero: custom banner image OR coded diagonal bars ----
-  const stripes = document.getElementById('heroStripes');
-  if(settings.heroBannerUrl){
-    const ok = await preloadImage(settings.heroBannerUrl);
-    if(ok){
-      hero.style.backgroundImage = `linear-gradient(135deg, rgba(38,49,66,.82), rgba(27,36,49,.88)), url('${settings.heroBannerUrl}')`;
-      hero.style.backgroundSize = 'cover';
-      hero.style.backgroundPosition = 'center';
-      stripes.style.display = 'none';
-    }else{
-      hero.style.backgroundImage = '';
-      stripes.style.display = 'block';
-      if(editMode) showToast('Não consegui carregar a imagem de fundo do topo — mantive as barras padrão. Confira se o link é público e direto para a imagem.');
-    }
-  }else{
-    hero.style.backgroundImage = '';
-    stripes.style.display = 'block';
-  }
-  const b1 = document.getElementById('heroBar1'), b2 = document.getElementById('heroBar2');
-  b1.style.display = settings.showBars ? 'block' : 'none';
-  b2.style.display = settings.showBars ? 'block' : 'none';
-  b1.style.background = settings.bar1Color;
-  b2.style.background = settings.bar2Color;
-}
-
 function defaultLogoHtml(){
   return `<div class="logo-mark">${DEFAULT_MARK_SVG}</div>
     <div class="logo-text">
-      <b>${settings.logoBrand}</b>
-      <span>${settings.logoSub}</span>
+      <b>${LOGO_BRAND}</b>
+      <span>${LOGO_SUB}</span>
     </div>`;
 }
 
+async function applyLogo(){
+  const logoSlot = document.getElementById('logoSlot');
+  const url = normalizePhotoUrl(LOGO_IMAGE_URL);
+  if(url && await preloadImage(url)){
+    logoSlot.innerHTML = `<img src="${url}" alt="Logo Atlantica" style="height:36px;max-width:220px;object-fit:contain;">`;
+  }else{
+    logoSlot.innerHTML = defaultLogoHtml();
+  }
+}
+
 // Em algumas plataformas de hospedagem window.storage já vem pronto (armazenamento persistente da própria página).
-// Fora delas (arquivo aberto direto, GitHub Pages, servidor comum etc.) essa API não existe — sem isso, todo
-// "Salvar" ficaria travado com erro silencioso no console. Este substituto guarda os dados no localStorage do navegador.
+// Fora delas (arquivo aberto direto, GitHub Pages, servidor comum etc.) essa API não existe. Este substituto guarda
+// os dados no localStorage do navegador — usado só para o cache de hotéis (carregamento instantâneo ao reabrir a página).
 if(!window.storage){
   window.storage = {
     get: async (key)=>{
@@ -478,11 +311,9 @@ if(!window.storage){
 
 let hotels = [];
 let amenities = [];
-let editMode = false;
 let activeRegion = "Todas";
 let activeAmenityFilters = new Set();
 let searchTerm = "";
-let pickedEmoji = EMOJI_OPTIONS[0];
 let lastSyncAt = null;
 let lastSyncError = null;
 let lastSheetFingerprint = null;
@@ -494,24 +325,9 @@ async function loadData(){
   }catch(e){
     hotels = FALLBACK_HOTELS.map(h => ({...h, id: 'seed_'+slugify(h.name)}));
   }
-  try{
-    const a = await window.storage.get('ahi_amenities_v2', true);
-    amenities = JSON.parse(a.value);
-  }catch(e){
-    amenities = DEFAULT_AMENITIES;
-    await window.storage.set('ahi_amenities_v2', JSON.stringify(amenities), true);
-  }
-  try{
-    const s = await window.storage.get('ahi_settings', true);
-    settings = {...SETTINGS_DEFAULT, ...JSON.parse(s.value)};
-  }catch(e){
-    settings = {...SETTINGS_DEFAULT};
-    await window.storage.set('ahi_settings', JSON.stringify(settings), true);
-  }
+  amenities = DEFAULT_AMENITIES.map(a=>({...a}));
 }
 async function cacheHotels(){ await window.storage.set('ahi_hotels_cache', JSON.stringify(hotels), true); }
-async function persistAmenities(){ await window.storage.set('ahi_amenities_v2', JSON.stringify(amenities), true); }
-async function persistSettings(){ await window.storage.set('ahi_settings', JSON.stringify(settings), true); }
 
 // Converte links comuns de compartilhamento (Google Drive) em links de imagem direta
 function normalizePhotoUrl(url){
@@ -567,10 +383,10 @@ function normalizeKey(s){
 function resolveAmenityId(label){
   const norm = normalizeKey(label);
   const found = amenities.find(a => normalizeKey(a.label) === norm);
-  if(found) return {id: found.id, created:false};
+  if(found) return found.id;
   const id = 'am_' + norm.slice(0,30) + '_' + Math.random().toString(36).slice(2,5);
   amenities.push({id, label: label.trim(), icon:'⭐'});
-  return {id, created:true};
+  return id;
 }
 
 function mapCsvToHotels(text){
@@ -585,7 +401,6 @@ function mapCsvToHotels(text){
   const get = (row, field) => colIndex[field] !== undefined ? (row[colIndex[field]] || '').trim() : '';
   const num = v => { v = (v||'').trim().replace(',','.'); if(v==='') return null; const n = Number(v); return isNaN(n) ? null : n; };
 
-  let amenitiesChanged = false;
   const result = [];
   for(let i=1;i<rows.length;i++){
     const row = rows[i];
@@ -598,11 +413,7 @@ function mapCsvToHotels(text){
       city = guess.city; state = guess.state;
     }
     const amenitiesRaw = get(row,'amenities');
-    const amenityIds = amenitiesRaw ? amenitiesRaw.split(/[;,]/).map(s=>s.trim()).filter(Boolean).map(label=>{
-      const r = resolveAmenityId(label);
-      if(r.created) amenitiesChanged = true;
-      return r.id;
-    }) : [];
+    const amenityIds = amenitiesRaw ? amenitiesRaw.split(/[;,]/).map(s=>s.trim()).filter(Boolean).map(resolveAmenityId) : [];
     result.push({
       id: 'sheet_' + slugify(name + '_' + city),
       region: get(row,'region') || 'Outras',
@@ -615,7 +426,6 @@ function mapCsvToHotels(text){
       photoUrl: normalizePhotoUrl(get(row,'photoUrl'))
     });
   }
-  if(amenitiesChanged) persistAmenities();
   return result;
 }
 
@@ -626,10 +436,8 @@ function guessCityStateFromAddress(address){
 }
 
 async function syncHotelsFromSheet(opts={}){
-  const url = (settings.sheetCsvUrl||'').trim();
-  if(!url){ lastSyncError = 'not-configured'; renderSyncStatus(); return; }
   try{
-    const res = await fetch(url, {cache:'no-store'});
+    const res = await fetch(SHEET_CSV_URL, {cache:'no-store'});
     if(!res.ok) throw new Error('http-'+res.status);
     const text = await res.text();
     const parsed = mapCsvToHotels(text);
@@ -655,10 +463,6 @@ async function syncHotelsFromSheet(opts={}){
 function renderSyncStatus(){
   const el = document.getElementById('syncStatus');
   if(!el) return;
-  if(!(settings.sheetCsvUrl||'').trim()){
-    el.innerHTML = `⚠️ Planilha não conectada — exibindo dados de exemplo.` + (editMode ? ` <button class="chip" style="padding:3px 12px;font-size:11.5px;" onclick="openDataSourceManager()">Conectar planilha</button>` : '');
-    return;
-  }
   if(lastSyncError){
     el.innerHTML = `⚠️ Não consegui atualizar a partir da planilha agora (mostrando os últimos dados carregados). <button class="chip" style="padding:3px 12px;font-size:11.5px;" onclick="syncHotelsFromSheet()">Tentar novamente</button>`;
     return;
@@ -670,30 +474,6 @@ function renderSyncStatus(){
 function getAllRegions(){
   const extra = Array.from(new Set(hotels.map(h=>h.region).filter(r=>r && !REGIONS.includes(r))));
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
-}
-
-// ---------- IMAGE UPLOAD (direto do computador, sem link) — usado no editor visual ----------
-// Lê o arquivo, redimensiona e comprime no navegador antes de guardar como texto (base64)
-function readAndCompressImage(file, maxWidth=1100, quality=0.72){
-  return new Promise((resolve,reject)=>{
-    if(!file.type.startsWith('image/')){ reject(new Error('not-an-image')); return; }
-    const reader = new FileReader();
-    reader.onload = (e)=>{
-      const img = new Image();
-      img.onload = ()=>{
-        let w = img.width, h = img.height;
-        if(w > maxWidth){ h = Math.round(h * (maxWidth / w)); w = maxWidth; }
-        const canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        resolve(canvas.toDataURL('image/jpeg', quality));
-      };
-      img.onerror = ()=>reject(new Error('img-load-failed'));
-      img.src = e.target.result;
-    };
-    reader.onerror = ()=>reject(new Error('read-failed'));
-    reader.readAsDataURL(file);
-  });
 }
 
 function renderChips(){
@@ -744,7 +524,6 @@ function cardHtml(h){
     return `<span class="amenity-pill">${a.icon} ${a.label}</span>`;
   }).join('');
   const extra = h.amenities.length>4 ? `<span class="amenity-pill">+${h.amenities.length-4}</span>` : '';
-  const amenityBlock = h.amenities.length ? amChips+extra : (editMode ? `<span class="amenity-pill muted">Sem comodidades cadastradas</span>` : '');
   const location = [h.city, h.state].filter(Boolean).join(' - ');
   return `
   <div class="card">
@@ -756,7 +535,7 @@ function cardHtml(h){
       <h3>${h.name}</h3>
       ${location ? `<div class="location">📍 ${location}</div>` : ''}
       <div class="capacity-mini">${capacityMiniHtml(h) || '<span class="hint">Capacidade não informada</span>'}</div>
-      <div class="amenity-row">${amenityBlock}</div>
+      <div class="amenity-row">${amChips}${extra}</div>
       <div class="card-actions">
         <button class="btn btn-primary" onclick="openDetail('${h.id}')">Ver detalhes</button>
       </div>
@@ -813,270 +592,8 @@ function openDetail(id){
   document.getElementById('detailOverlay').classList.add('show');
 }
 
-// ---------- AMENITY MANAGER ----------
-function openAmenityManager(){
-  pickedEmoji = EMOJI_OPTIONS[0];
-  renderAmenityManagerModal();
-  document.getElementById('amenityOverlay').classList.add('show');
-}
-function renderAmenityManagerModal(){
-  const rows = amenities.map(a=>`
-    <div class="amenity-manager-row">
-      <span class="em">${a.icon}</span><span class="lb">${a.label}</span>
-      <button class="icon-btn danger" onclick="removeAmenity('${a.id}')" title="Remover">🗑</button>
-    </div>`).join('') || '<p class="hint">Nenhuma comodidade cadastrada ainda.</p>';
-  const emojiPicker = EMOJI_OPTIONS.map(e=>`<button class="emoji-opt ${e===pickedEmoji?'sel':''}" onclick="pickEmoji('${e}')">${e}</button>`).join('');
-  document.getElementById('amenityModal').innerHTML = `
-    <div class="modal-header">
-      <h2>Gerenciar comodidades</h2>
-      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
-    </div>
-    <div class="modal-body">
-      <p class="hint">Essas são as comodidades disponíveis para marcar em cada empreendimento. Adicione quantas quiser.</p>
-      <div class="amenity-manager-list">${rows}</div>
-      <div style="border-top:1px solid #eee;padding-top:16px;">
-        <p class="toolbar-label">Adicionar nova comodidade</p>
-        <div class="add-amenity-row">
-          <div class="field" style="flex:1;"><label>Nome</label><input id="newAmenityLabel" placeholder="Ex: Vista para o mar"></div>
-          <button class="btn btn-primary" onclick="addAmenity()">Adicionar</button>
-        </div>
-        <p class="hint" style="margin-top:10px;">Escolha um ícone:</p>
-        <div class="emoji-pick">${emojiPicker}</div>
-      </div>
-    </div>`;
-}
-function pickEmoji(e){ pickedEmoji = e; renderAmenityManagerModal(); }
-async function addAmenity(){
-  const label = document.getElementById('newAmenityLabel').value.trim();
-  if(!label){ showToast('Dê um nome para a comodidade.'); return; }
-  const id = 'am_' + label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').slice(0,30) + '_' + Math.random().toString(36).slice(2,5);
-  amenities.push({id, label, icon: pickedEmoji});
-  await persistAmenities();
-  renderAmenityManagerModal();
-  renderChips();
-  showToast('Comodidade adicionada.');
-}
-function removeAmenity(id){
-  showConfirm('Remover esta comodidade da lista? Ela deixará de aparecer nos empreendimentos que a usam.', async ()=>{
-    amenities = amenities.filter(a=>a.id!==id);
-    activeAmenityFilters.delete(id);
-    await persistAmenities();
-    renderAmenityManagerModal();
-    renderChips();
-    renderMain();
-    showToast('Comodidade removida.');
-  });
-}
-
-// ---------- EDIT MODE ----------
-// ---------- VISUAL SETTINGS ----------
-async function handleVisualFileChange(event, inputId, previewId){
-  const file = event.target.files[0];
-  if(!file) return;
-  const preview = document.getElementById(previewId);
-  preview.innerHTML = `<p class="hint">Processando imagem...</p>`;
-  try{
-    const dataUrl = await readAndCompressImage(file, 1400, 0.78);
-    document.getElementById(inputId).value = dataUrl;
-    preview.innerHTML = `<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
-      <img src="${dataUrl}" style="width:70px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--gray-light);">
-      <span style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Pronta para salvar</span>
-    </div>`;
-  }catch(e){
-    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;">✕ Não consegui ler esse arquivo. Tente outra imagem (jpg, png).</p>`;
-  }
-}
-
-function openVisualManager(){
-  const colorOptions = (selected) => Object.entries(BRAND_COLORS).map(([name,hex])=>
-    `<option value="${hex}" ${selected===hex?'selected':''}>${name}</option>`).join('');
-  document.getElementById('amenityModal').innerHTML = `
-    <div class="modal-header">
-      <h2>Editar visual</h2>
-      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
-    </div>
-    <div class="modal-body">
-      <div class="form-grid">
-        <div class="field full" style="background:#fff3ea;border:1.5px solid var(--orange-light);border-radius:10px;padding:14px;">
-          <label>Cabeçalho completo (imagem pronta com logo, título e barras)</label>
-          <input type="file" id="v_fullHeaderFile" accept="image/*" onchange="handleVisualFileChange(event,'v_fullHeader','v_fullHeaderPreview')">
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <input id="v_fullHeader" value="${settings.fullHeaderImageUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
-            <button type="button" class="btn btn-ghost" onclick="testImageField('v_fullHeader','v_fullHeaderPreview')">Testar link</button>
-          </div>
-          <span class="hint">Envie a arte pronta do time de design (recomendado: pelo menos 1600px de largura). Se preencher isso, os campos de logo, banner, título e barras abaixo são <b>ignorados</b> — só a busca continua funcionando, embaixo da imagem. Deixe em branco para usar o cabeçalho padrão montado pela página.</span>
-          <div id="v_fullHeaderPreview"></div>
-        </div>
-        <div class="field full">
-          <label>Logo (imagem completa, com marca e nome)</label>
-          <input type="file" id="v_fullLogoFile" accept="image/*" onchange="handleVisualFileChange(event,'v_fullLogo','v_fullLogoPreview')">
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <input id="v_fullLogo" value="${settings.fullLogoImageUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
-            <button type="button" class="btn btn-ghost" onclick="testImageField('v_fullLogo','v_fullLogoPreview')">Testar link</button>
-          </div>
-          <span class="hint">Usado apenas se o campo acima (cabeçalho completo) estiver vazio. Deixe tudo em branco para usar a logo oficial da Atlantica.</span>
-          <div id="v_fullLogoPreview"></div>
-        </div>
-        <div class="field full">
-          <label>Imagem de fundo do topo (banner)</label>
-          <input type="file" id="v_heroBannerFile" accept="image/*" onchange="handleVisualFileChange(event,'v_heroBanner','v_heroBannerPreview')">
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <input id="v_heroBanner" value="${settings.heroBannerUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
-            <button type="button" class="btn btn-ghost" onclick="testImageField('v_heroBanner','v_heroBannerPreview')">Testar link</button>
-          </div>
-          <span class="hint">Se preencher, substitui as barras diagonais como fundo do topo. Deixe em branco para manter as barras.</span>
-          <div id="v_heroBannerPreview"></div>
-        </div>
-        <div class="field full"><label>Título principal (hero)</label><input id="v_heroTitle" value="${settings.heroTitle}"></div>
-        <div class="field"><label>Cor da 1ª barra</label><select id="v_bar1">${colorOptions(settings.bar1Color)}</select></div>
-        <div class="field"><label>Cor da 2ª barra</label><select id="v_bar2">${colorOptions(settings.bar2Color)}</select></div>
-        <label class="checkbox-item full" style="grid-column:1/-1;">
-          <input type="checkbox" id="v_showBars" ${settings.showBars?'checked':''}> Mostrar as barras diagonais (ignorado se houver imagem de fundo)
-        </label>
-      </div>
-      <p class="hint">As barras seguem sempre o ângulo oficial da marca (37°) e não têm cantos arredondados — só a cor e a exibição são editáveis, para não fugir do manual.</p>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="resetVisualSettings()">Restaurar padrão</button>
-        <button class="btn btn-primary" onclick="saveVisualSettings()">Salvar visual</button>
-      </div>
-    </div>`;
-  document.getElementById('amenityOverlay').classList.add('show');
-  // testa automaticamente os links já salvos, se houver
-  if(settings.fullHeaderImageUrl) testImageField('v_fullHeader','v_fullHeaderPreview');
-  if(settings.fullLogoImageUrl) testImageField('v_fullLogo','v_fullLogoPreview');
-  if(settings.heroBannerUrl) testImageField('v_heroBanner','v_heroBannerPreview');
-}
-
-async function testImageField(inputId, previewId){
-  const url = document.getElementById(inputId).value.trim();
-  const preview = document.getElementById(previewId);
-  if(!url){ preview.innerHTML = ''; return; }
-  preview.innerHTML = `<p class="hint">Testando link...</p>`;
-  const normalized = normalizePhotoUrl(url);
-  const ok = await preloadImage(normalized);
-  if(ok){
-    preview.innerHTML = `<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
-      <img src="${normalized}" style="width:70px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--gray-light);">
-      <span style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Link carregou normalmente</span>
-    </div>`;
-  }else{
-    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;margin-top:6px;line-height:1.5;">
-      ✕ Não consegui carregar essa imagem. <a href="${normalized}" target="_blank" rel="noopener" style="color:#d9534f;">Clique aqui para abrir o link direto numa aba nova</a> — se pedir login ou der erro de acesso, o arquivo ainda não está público; se abrir a imagem normalmente, é o Google Drive bloqueando o carregamento dentro de outras páginas (acontece mesmo com arquivo público).<br><br>
-      Se continuar sem funcionar, o caminho mais confiável é subir a foto em um serviço feito pra isso, como <a href="https://imgbb.com" target="_blank" rel="noopener" style="color:#d9534f;text-decoration:underline;">imgbb.com</a> (gratuito, sem precisar de conta) — ele te dá um link direto que funciona sempre.
-    </p>`;
-  }
-  return ok;
-}
-
-async function saveVisualSettings(){
-  const fullHeader = normalizePhotoUrl(document.getElementById('v_fullHeader').value.trim());
-  const fullLogo = normalizePhotoUrl(document.getElementById('v_fullLogo').value.trim());
-  const heroBanner = normalizePhotoUrl(document.getElementById('v_heroBanner').value.trim());
-  settings = {
-    ...settings,
-    fullHeaderImageUrl: fullHeader,
-    fullLogoImageUrl: fullLogo,
-    heroBannerUrl: heroBanner,
-    heroTitle: document.getElementById('v_heroTitle').value.trim() || SETTINGS_DEFAULT.heroTitle,
-    bar1Color: document.getElementById('v_bar1').value,
-    bar2Color: document.getElementById('v_bar2').value,
-    showBars: document.getElementById('v_showBars').checked
-  };
-  await persistSettings();
-  await applySettings();
-  closeOverlay('amenityOverlay');
-  showToast('Visual salvo. Se algum link não carregou, a área correspondente volta ao padrão da marca.');
-}
-async function resetVisualSettings(){
-  settings = {...SETTINGS_DEFAULT, sheetCsvUrl: settings.sheetCsvUrl};
-  await persistSettings();
-  await applySettings();
-  closeOverlay('amenityOverlay');
-  showToast('Visual restaurado ao padrão da marca.');
-}
-
-// ---------- DATA SOURCE (planilha) ----------
-function openDataSourceManager(){
-  document.getElementById('amenityModal').innerHTML = `
-    <div class="modal-header">
-      <h2>Conectar planilha de hotéis</h2>
-      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
-    </div>
-    <div class="modal-body">
-      <p class="hint" style="line-height:1.6;">
-        A lista de empreendimentos vem de uma planilha do Google Sheets. Para conectar:<br>
-        1. A primeira linha da planilha deve ter os cabeçalhos: <b>Região, Hotel, Endereço, Telefone, Email, Apartamentos, Capacidade Sala Eventos (U), Salas de Eventos, Lugares no Auditório</b> — igual ao que já está montado hoje.<br>
-        &nbsp;&nbsp;Cidade e UF são detectados automaticamente a partir do fim do endereço (ex: "..., Belo Horizonte - MG"). Se quiser, também pode adicionar colunas opcionais de <b>Bandeira</b>, <b>Comodidades</b> (nomes separados por vírgula ou ponto e vírgula — cria a comodidade automaticamente se ainda não existir) e <b>Foto URL</b>.<br>
-        2. No Sheets: Arquivo → Compartilhar → Publicar na Web → escolha a aba → formato <b>CSV</b> → Publicar.<br>
-        3. Cole o link gerado abaixo.
-      </p>
-      <div class="field full">
-        <label>Link CSV publicado</label>
-        <input id="ds_url" value="${settings.sheetCsvUrl||''}" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv">
-      </div>
-      <div id="ds_preview"></div>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="testDataSourceUrl()">Testar link</button>
-        <button class="btn btn-primary" onclick="saveDataSourceUrl()">Salvar</button>
-      </div>
-    </div>`;
-  document.getElementById('amenityOverlay').classList.add('show');
-}
-
-async function testDataSourceUrl(){
-  const url = document.getElementById('ds_url').value.trim();
-  const preview = document.getElementById('ds_preview');
-  if(!url){ preview.innerHTML = ''; return; }
-  preview.innerHTML = `<p class="hint">Testando link...</p>`;
-  try{
-    const res = await fetch(url, {cache:'no-store'});
-    if(!res.ok) throw new Error('http-'+res.status);
-    const text = await res.text();
-    const parsed = mapCsvToHotels(text);
-    preview.innerHTML = `<p style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Link funcionando — ${parsed.length} empreendimento${parsed.length!==1?'s':''} encontrado${parsed.length!==1?'s':''} na planilha.</p>`;
-  }catch(e){
-    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;">✕ Não consegui ler essa planilha. Confira se o link foi gerado por "Publicar na web" com formato CSV e se a aba está correta.</p>`;
-  }
-}
-
-async function saveDataSourceUrl(){
-  settings.sheetCsvUrl = document.getElementById('ds_url').value.trim();
-  await persistSettings();
-  closeOverlay('amenityOverlay');
-  showToast('Link da planilha salvo. Sincronizando...');
-  await syncHotelsFromSheet();
-}
-
-function toggleEditMode(){
-  if(!editMode){
-    showPasswordPrompt();
-  }else{
-    editMode = false;
-    document.getElementById('editToggleBtn').classList.remove('active');
-    document.getElementById('editToggleBtn').textContent = 'acesso da equipe';
-    document.getElementById('manageAmenitiesBtn').style.display = 'none';
-    document.getElementById('manageVisualBtn').style.display = 'none';
-    document.getElementById('manageDataBtn').style.display = 'none';
-    renderMain();
-    renderSyncStatus();
-    showToast('Modo de edição desativado.');
-  }
-}
-function activateEditMode(){
-  editMode = true;
-  document.getElementById('editToggleBtn').classList.add('active');
-  document.getElementById('editToggleBtn').textContent = 'modo edição ativo';
-  document.getElementById('manageAmenitiesBtn').style.display = 'block';
-  document.getElementById('manageVisualBtn').style.display = 'block';
-  document.getElementById('manageDataBtn').style.display = 'block';
-  renderMain();
-  renderSyncStatus();
-  showToast('Modo de edição ativado.');
-}
-
 function closeOverlay(id){ document.getElementById(id).classList.remove('show'); }
 
-// ---------- CUSTOM UI: toast / confirm / password (replacements for alert/confirm/prompt, which are blocked in this environment) ----------
 function showToast(msg){
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -1086,59 +603,15 @@ function showToast(msg){
   showToast._t = setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 2600);
 }
 
-function showConfirm(message, onConfirm){
-  document.getElementById('confirmModal').innerHTML = `
-    <div class="modal-body" style="padding-top:26px;">
-      <p style="font-size:15px;line-height:1.5;">${message}</p>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="closeOverlay('confirmOverlay')">Cancelar</button>
-        <button class="btn btn-primary" id="confirmYesBtn" style="background:#d9534f;">Confirmar</button>
-      </div>
-    </div>`;
-  document.getElementById('confirmOverlay').classList.add('show');
-  document.getElementById('confirmYesBtn').onclick = ()=>{ closeOverlay('confirmOverlay'); onConfirm(); };
-}
-
-function showPasswordPrompt(){
-  document.getElementById('passwordModal').innerHTML = `
-    <div class="modal-header"><h2>Acesso da equipe</h2><button class="modal-close" onclick="closeOverlay('passwordOverlay')">×</button></div>
-    <div class="modal-body">
-      <div class="field"><label>Senha</label><input type="password" id="passwordInput" placeholder="Digite a senha"></div>
-      <p class="hint" id="passwordError" style="color:#d9534f;display:none;">Senha incorreta. Tente novamente.</p>
-      <div class="form-actions">
-        <button class="btn btn-ghost" onclick="closeOverlay('passwordOverlay')">Cancelar</button>
-        <button class="btn btn-primary" id="passwordSubmitBtn">Entrar</button>
-      </div>
-    </div>`;
-  document.getElementById('passwordOverlay').classList.add('show');
-  const input = document.getElementById('passwordInput');
-  input.focus();
-  const submit = ()=>{
-    if(input.value === EDIT_PASSWORD){
-      closeOverlay('passwordOverlay');
-      activateEditMode();
-    }else{
-      document.getElementById('passwordError').style.display = 'block';
-    }
-  };
-  document.getElementById('passwordSubmitBtn').onclick = submit;
-  input.onkeydown = (e)=>{ if(e.key==='Enter') submit(); };
-}
-
 // ---------- INIT ----------
 document.querySelectorAll('.overlay').forEach(ov=>{
   ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('show'); });
 });
-document.getElementById('editToggleBtn').onclick = toggleEditMode;
-document.getElementById('manageAmenitiesBtn').onclick = openAmenityManager;
-document.getElementById('manageVisualBtn').onclick = openVisualManager;
-document.getElementById('manageDataBtn').onclick = openDataSourceManager;
-document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.value; document.getElementById('searchInput2').value = e.target.value; renderMain(); };
-document.getElementById('searchInput2').oninput = (e)=>{ searchTerm = e.target.value; document.getElementById('searchInput').value = e.target.value; renderMain(); };
+document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.value; renderMain(); };
 
 (async function init(){
   await loadData();
-  await applySettings();
+  await applyLogo();
   renderChips();
   renderMain();
   await syncHotelsFromSheet({initial:true});
