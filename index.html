@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catálogo de Empreendimentos · Atlantica Hospitality International</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#263142;
+    --navy-2:#1b2431;
+    --gray-dark:#6e6e6e;
+    --gray-light:#dbdbd3;
+    --white:#ffffff;
+    --orange-dark:#ed7d31;
+    --orange-light:#ffab7b;
+    --black:#000000;
+    --blue-light:#00b5e2;
+    --radius:10px;
+    --shadow:0 6px 24px rgba(38,49,66,.10);
+    --shadow-lg:0 20px 60px rgba(38,49,66,.28);
+    font-family:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:#f6f6f4;color:var(--navy);}
+  h1,h2,h3,h4{font-family:'Outfit',sans-serif;margin:0;letter-spacing:-0.01em;}
+  p{margin:0;}
+  button{font-family:inherit;cursor:pointer;}
+  a{color:inherit;}
+  ::selection{background:var(--orange-light);color:var(--navy);}
+  :focus-visible{outline:3px solid var(--blue-light);outline-offset:2px;}
+
+  /* ---------- HEADER ---------- */
+  .topbar{background:var(--navy);color:#fff;position:sticky;top:0;z-index:40;}
+  .topbar-inner{max-width:1280px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;gap:18px;}
+  .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+  .logo-mark{width:34px;height:34px;position:relative;flex-shrink:0;color:#fff;}
+  .logo-mark svg{width:100%;height:100%;}
+  .logo-text{line-height:1.1;}
+  .logo-text b{display:block;font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;letter-spacing:.03em;}
+  .logo-text span{display:block;font-size:9px;letter-spacing:.12em;color:#b9c2cf;font-weight:600;}
+  .searchbox{flex:1;max-width:420px;position:relative;}
+  .searchbox input{width:100%;padding:10px 14px 10px 38px;border-radius:999px;border:none;background:#33415a;color:#fff;font-size:14px;}
+  .searchbox input::placeholder{color:#9fadc0;}
+  .searchbox svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);opacity:.6;width:15px;height:15px;}
+  .edit-toggle{margin-left:auto;font-size:12.5px;color:#9fadc0;background:none;border:1px solid #3b4a63;padding:8px 14px;border-radius:999px;white-space:nowrap;transition:.15s;}
+  .edit-toggle:hover{color:#fff;border-color:var(--orange-dark);}
+  .edit-toggle.active{background:var(--orange-dark);border-color:var(--orange-dark);color:#fff;}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--navy) 55%,var(--navy-2) 100%);color:#fff;padding:64px 24px 56px;}
+  .hero-stripes{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+  .hero-stripes .bar{position:absolute;top:-10%;height:130%;width:64px;transform:skewX(-37deg);}
+  .hero-stripes .bar.b1{right:180px;background:var(--orange-dark);}
+  .hero-stripes .bar.b2{right:90px;background:var(--blue-light);opacity:.9;}
+  .hero-inner{max-width:1280px;margin:0 auto;position:relative;z-index:1;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;letter-spacing:.14em;font-weight:600;color:var(--orange-light);text-transform:uppercase;margin-bottom:18px;}
+  .eyebrow::before{content:"";width:14px;height:20px;background:var(--orange-dark);transform:skewX(-37deg);display:inline-block;flex-shrink:0;}
+  .hero h1{font-size:clamp(30px,4.4vw,50px);font-weight:700;max-width:16ch;line-height:1.06;}
+  .hero p.sub{margin-top:16px;font-size:16.5px;color:#c7cfdb;max-width:56ch;line-height:1.55;}
+  .stats-row{display:flex;flex-wrap:wrap;gap:36px;margin-top:40px;}
+  .stat b{display:block;font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:var(--orange-light);}
+  .stat span{font-size:12.5px;color:#aab5c4;}
+
+  /* ---------- TOOLBAR ---------- */
+  .toolbar{max-width:1280px;margin:-28px auto 0;padding:0 24px;position:relative;z-index:2;}
+  .toolbar-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{border:1.5px solid var(--gray-light);background:#fff;color:var(--navy);font-size:13px;font-weight:500;padding:7px 14px;border-radius:999px;transition:.15s;display:inline-flex;align-items:center;gap:6px;}
+  .chip:hover{border-color:var(--orange-dark);}
+  .chip.active{background:var(--navy);border-color:var(--navy);color:#fff;}
+  .chip.amenity.active{background:var(--orange-dark);border-color:var(--orange-dark);}
+  .toolbar-label{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--gray-dark);margin:0 0 8px;}
+  .toolbar-row + .toolbar-row{margin-top:16px;padding-top:16px;border-top:1px solid #eee;}
+
+  /* ---------- MAIN ---------- */
+  main{max-width:1280px;margin:0 auto;padding:40px 24px 100px;}
+  .region-section{margin-top:52px;}
+  .region-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;}
+  .region-head .bar{width:5px;height:30px;background:var(--orange-dark);border-radius:2px;}
+  .region-head h2{font-size:23px;font-weight:700;}
+  .region-head .count{font-size:13px;color:var(--gray-dark);background:#eceae2;padding:3px 10px;border-radius:999px;}
+  .empty-region{color:var(--gray-dark);font-size:14px;padding:18px 0;}
+
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:20px;}
+  .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s;position:relative;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(38,49,66,.16);}
+  .card-photo{height:132px;background:linear-gradient(135deg,var(--navy),#3a4a63);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .card-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+  .card-photo .mono{font-family:'Outfit',sans-serif;font-size:34px;font-weight:700;color:rgba(255,255,255,.35);}
+  .card-photo .stripe{position:absolute;width:34px;height:220%;background:var(--orange-dark);transform:skewX(-37deg);right:26px;top:-60%;}
+  .brand-tag{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);color:var(--navy);font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:4px 9px;border-radius:6px;text-transform:uppercase;}
+  .card-body{padding:16px 16px 14px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .card-body h3{font-size:16.5px;font-weight:700;line-height:1.25;}
+  .location{font-size:12.5px;color:var(--gray-dark);display:flex;align-items:center;gap:5px;}
+  .capacity-mini{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--navy);}
+  .capacity-mini span{display:flex;align-items:center;gap:4px;color:#4b5567;}
+  .amenity-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;}
+  .amenity-pill{background:#f1f0ea;font-size:11px;padding:4px 8px;border-radius:999px;display:flex;align-items:center;gap:4px;color:var(--navy);}
+  .amenity-pill.muted{color:var(--gray-dark);font-style:italic;background:none;padding-left:0;}
+  .card-actions{margin-top:auto;display:flex;gap:8px;padding-top:6px;}
+  .btn{border:none;border-radius:8px;padding:9px 14px;font-size:13px;font-weight:600;text-align:center;}
+  .btn-primary{background:var(--navy);color:#fff;flex:1;}
+  .btn-primary:hover{background:var(--navy-2);}
+  .btn-ghost{background:#fff;border:1.4px solid var(--gray-light);color:var(--navy);}
+  .btn-ghost:hover{border-color:var(--orange-dark);}
+  .icon-btn{width:34px;height:34px;border-radius:8px;border:1.4px solid var(--gray-light);background:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .icon-btn.danger:hover{border-color:#d9534f;background:#fdf1f0;}
+  .icon-btn:hover{border-color:var(--orange-dark);}
+
+  .manage-link{position:fixed;bottom:26px;left:26px;background:#fff;border:1.5px solid var(--gray-light);color:var(--navy);border-radius:999px;padding:12px 18px;font-weight:600;font-size:13px;box-shadow:var(--shadow);z-index:30;}
+  .manage-link:hover{border-color:var(--orange-dark);}
+
+  /* ---------- MODAL ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(20,26,36,.55);backdrop-filter:blur(2px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;}
+  .overlay.show{display:flex;}
+  .modal{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg);}
+  .modal-header{padding:20px 24px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;position:sticky;top:0;background:#fff;z-index:2;}
+  .modal-header h2{font-size:19px;}
+  .modal-close{background:none;border:none;font-size:22px;color:var(--gray-dark);line-height:1;padding:4px;}
+  .modal-body{padding:22px 24px 28px;display:flex;flex-direction:column;gap:18px;}
+  .detail-photo{width:100%;height:180px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover;object-position:center top;}
+  .detail-row{display:flex;gap:10px;font-size:14px;align-items:flex-start;}
+  .detail-row .ico{width:20px;text-align:center;flex-shrink:0;margin-top:1px;}
+  .detail-row a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--orange-dark);}
+  .detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .detail-stat{background:#f6f6f4;border-radius:8px;padding:10px 8px;text-align:center;}
+  .detail-stat b{display:block;font-family:'Outfit',sans-serif;font-size:19px;}
+  .detail-stat span{font-size:10.5px;color:var(--gray-dark);}
+  .detail-amenities{display:flex;flex-wrap:wrap;gap:8px;}
+
+  /* form */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .field{display:flex;flex-direction:column;gap:5px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:12px;font-weight:600;color:var(--gray-dark);}
+  .field input,.field select{padding:9px 11px;border:1.5px solid var(--gray-light);border-radius:8px;font-size:14px;font-family:inherit;}
+  .field input:focus,.field select:focus{border-color:var(--orange-dark);}
+  .checkbox-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+  .checkbox-item{display:flex;align-items:center;gap:7px;font-size:13.5px;border:1.5px solid var(--gray-light);border-radius:8px;padding:8px 10px;}
+  .checkbox-item input{width:16px;height:16px;flex-shrink:0;}
+  .form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px;}
+  .hint{font-size:12px;color:var(--gray-dark);}
+
+  .amenity-manager-list{display:flex;flex-direction:column;gap:8px;}
+  .amenity-manager-row{display:flex;align-items:center;gap:10px;border:1.5px solid var(--gray-light);border-radius:8px;padding:8px 10px;}
+  .amenity-manager-row .em{font-size:18px;width:26px;text-align:center;}
+  .amenity-manager-row .lb{flex:1;font-size:14px;}
+  .add-amenity-row{display:flex;gap:8px;align-items:flex-end;}
+  .emoji-pick{display:flex;flex-wrap:wrap;gap:6px;max-width:280px;}
+  .emoji-opt{font-size:18px;padding:5px 7px;border:1.5px solid var(--gray-light);border-radius:6px;background:#fff;}
+  .emoji-opt.sel{border-color:var(--orange-dark);background:#fff3ea;}
+
+  footer{background:var(--navy);color:#9fadc0;text-align:center;font-size:12.5px;padding:26px 20px;}
+  footer b{color:#fff;}
+  .footer-edit-link.active{color:var(--orange-light) !important;}
+
+  @media(max-width:640px){
+    .form-grid{grid-template-columns:1fr;}
+    .detail-grid{grid-template-columns:repeat(2,1fr);}
+    .topbar-inner{flex-wrap:wrap;}
+    .searchbox{order:3;max-width:100%;width:100%;}
+    .edit-toggle{margin-left:0;}
+    .manage-link{left:16px !important;bottom:auto;top:16px;font-size:11px;padding:8px 12px;}
+    #manageAmenitiesBtn{top:16px;}
+    #manageVisualBtn{top:62px;}
+    #manageDataBtn{top:108px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- Cabeçalho como imagem completa (opcional, substitui tudo abaixo quando preenchido) -->
+<div id="customHeaderBlock" style="display:none;">
+  <img id="customHeaderImg" style="width:100%;display:block;" alt="Cabeçalho Atlantica">
+  <div style="background:var(--navy);padding:12px 24px;">
+    <div class="searchbox" style="max-width:420px;margin:0 auto;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="searchInput2" type="text" placeholder="Buscar por hotel, cidade ou bandeira...">
+    </div>
+  </div>
+</div>
+
+<div class="topbar" id="topbarEl">
+  <div class="topbar-inner">
+    <div class="logo" id="logoSlot">
+      <div class="logo-mark">
+        <svg viewBox="0 0 620 420" fill="none">
+          <rect x="52" y="43" width="517" height="323" rx="95" ry="95" stroke="currentColor" stroke-width="26"/>
+          <polygon points="94,302 135,302 283,106 242,106" fill="currentColor"/>
+          <line x1="323" y1="106" x2="323" y2="302" stroke="currentColor" stroke-width="32"/>
+          <line x1="489" y1="106" x2="489" y2="302" stroke="currentColor" stroke-width="32"/>
+          <line x1="323" y1="204" x2="489" y2="204" stroke="currentColor" stroke-width="32"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <b>ATLANTICA</b>
+        <span>HOSPITALITY INTERNATIONAL</span>
+      </div>
+    </div>
+    <div class="searchbox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="white"><circle cx="11" cy="11" r="7" stroke-width="2"/><path d="M21 21l-4.3-4.3" stroke-width="2" stroke-linecap="round"/></svg>
+      <input id="searchInput" type="text" placeholder="Buscar por hotel, cidade ou bandeira...">
+    </div>
+  </div>
+</div>
+
+<div class="hero" id="heroSection">
+  <div class="hero-stripes" id="heroStripes"><div class="bar b1" id="heroBar1"></div><div class="bar b2" id="heroBar2"></div></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Catálogo de empreendimentos</div>
+    <h1 id="heroTitleEl">Presentes em todas as regiões do Brasil</h1>
+    <p class="sub" id="heroSubtitleEl">Encontre o empreendimento ideal por região, cidade ou comodidades.</p>
+    <div class="stats-row">
+      <div class="stat"><b>+165</b><span>empreendimentos</span></div>
+      <div class="stat"><b>+25</b><span>anos de mercado</span></div>
+      <div class="stat"><b>+28k</b><span>quartos</span></div>
+      <div class="stat"><b>97%</b><span>renovação de contratos</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="toolbar-card">
+    <div id="syncStatus" class="hint" style="margin-bottom:14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;"></div>
+    <div class="toolbar-row">
+      <p class="toolbar-label">Região</p>
+      <div class="chip-row" id="regionChips"></div>
+    </div>
+    <div class="toolbar-row">
+      <p class="toolbar-label">Comodidades</p>
+      <div class="chip-row" id="amenityChips"></div>
+    </div>
+  </div>
+</div>
+
+<main id="mainContent"></main>
+
+<button class="manage-link" id="manageAmenitiesBtn" style="display:none;">⚙ Gerenciar comodidades</button>
+<button class="manage-link" id="manageVisualBtn" style="display:none;left:230px;">🎨 Editar visual</button>
+<button class="manage-link" id="manageDataBtn" style="display:none;left:420px;">🔗 Fonte de dados</button>
+
+<!-- DETAIL MODAL -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal" id="detailModal"></div>
+</div>
+
+<!-- AMENITY MANAGER MODAL -->
+<div class="overlay" id="amenityOverlay">
+  <div class="modal" id="amenityModal"></div>
+</div>
+
+<footer>
+  Catálogo interno · <b>Atlantica Hospitality International</b> · dados mantidos pelo time comercial
+  <div style="margin-top:10px;"><button id="editToggleBtn" class="footer-edit-link" style="background:none;border:none;color:#5a6a80;font-size:11px;cursor:pointer;text-decoration:underline;padding:4px;">acesso da equipe</button></div>
+</footer>
+
+<!-- PASSWORD MODAL -->
+<div class="overlay" id="passwordOverlay">
+  <div class="modal" id="passwordModal" style="max-width:360px;"></div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="overlay" id="confirmOverlay">
+  <div class="modal" id="confirmModal" style="max-width:380px;"></div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13.5px;box-shadow:var(--shadow-lg);z-index:200;opacity:0;pointer-events:none;transition:.2s;"></div>
+
+<script>
+const REGIONS = ["Centro-Oeste","Nordeste","Norte","Sudeste","Sul","Residencial"];
+const EDIT_PASSWORD = "atlantica2026";
+const EMOJI_OPTIONS = ["🏊","🏋️","🅿️","📶","🍽️","🍳","🍸","🐾","♿","🧺","💻","🚲","🏪","💆","🧒","🚐","❄️","🔥","🌊","🛎️","🎉","🧖","🚭","🐕"];
+
+const DEFAULT_AMENITIES = [
+  {id:"estacionamento", label:"Estacionamento", icon:"🅿️"},
+  {id:"academia", label:"Academia", icon:"🏋️"},
+  {id:"piscina", label:"Piscina", icon:"🏊"},
+  {id:"carregador_eletrico", label:"Carregador elétrico", icon:"🔌"},
+  {id:"pet_friendly", label:"Pet friendly", icon:"🐾"},
+  {id:"sauna", label:"Sauna", icon:"🧖"},
+  {id:"spa", label:"Spa", icon:"💆"},
+  {id:"quadra_esportiva", label:"Quadra esportiva", icon:"🏀"},
+  {id:"brinquedoteca", label:"Brinquedoteca", icon:"🧸"},
+  {id:"salao_jogos", label:"Salão de jogos", icon:"🎮"},
+  {id:"copa_bebe", label:"Copa para bebê", icon:"🍼"},
+  {id:"transfer", label:"Transfer", icon:"🚐"},
+  {id:"salao_beleza", label:"Salão de beleza", icon:"💇"},
+  {id:"recreacao_infantil", label:"Recreação infantil", icon:"🎈"},
+  {id:"servico_praia", label:"Serviço de praia", icon:"🏖️"},
+  {id:"sala_vip", label:"Sala VIP", icon:"🛋️"},
+  {id:"lavanderia", label:"Lavanderia", icon:"🧺"},
+];
+
+// Dados de exemplo, usados apenas enquanto nenhuma planilha estiver conectada (ver "Fonte de dados" no modo de edição)
+const FALLBACK_HOTELS = [
+  {region:"Centro-Oeste", brand:"Comfort Hotel", name:"Comfort Hotel Goiânia", city:"Goiânia", state:"GO", address:"Av. Dr. Ismerino Soares de Carvalho, 52 - St. Aeroporto, Goiânia - GO", phone:"+55 (62) 3412-1550", email:"reservas.chgo@ahi.com.br", apartments:189, uFormat:30, salas:4, auditorio:90, amenities:[]},
+  {region:"Centro-Oeste", brand:"Comfort Hotel & Suites", name:"Comfort Hotel & Suites Rondonópolis", city:"Rondonópolis", state:"MT", address:"Av. Rotary Internacional, 1815 - Vila Aurora Segunda Parte, Rondonópolis - MT", phone:"+55 (66) 3439-5400", email:"reservas.chro@ahi.com.br", apartments:132, uFormat:60, salas:6, auditorio:200, amenities:[]},
+  {region:"Centro-Oeste", brand:"Radisson", name:"Radisson Anápolis", city:"Anápolis", state:"GO", address:"Av. Oscar Mohn, nº 250 - Jundiaí, Anápolis - GO", phone:"+55 (62) 3098-9800", email:"reservas.raps@ahi.com.br", apartments:105, uFormat:40, salas:3, auditorio:150, amenities:[]},
+  {region:"Centro-Oeste", brand:"WTC Hotel & Stay by Atlantica", name:"WTC Hotel & Stay Goiânia", city:"Goiânia", state:"GO", address:"Rua 143A, 1200 - Setor Marista, Goiânia - GO", phone:"+55 (62) 2013-0388", email:"reservas.wtcb@ahi.com.br", apartments:204, uFormat:null, salas:null, auditorio:null, amenities:[]},
+
+  {region:"Nordeste", brand:"Arcus Hotel by Atlantica", name:"Arcus Hotel Aracaju by Atlantica", city:"Aracaju", state:"SE", address:"Av. Mario Jorge Menezes Viêira, 428 - Coroa do Meio, Aracaju - SE", phone:"+55 (79) 3225-6750", email:"gerencia@arcushotel.com.br", apartments:132, uFormat:200, salas:6, auditorio:450, amenities:[]},
+  {region:"Nordeste", brand:"Bugan Hotel by Atlantica", name:"Bugan Hotel Recife by Atlantica", city:"Recife", state:"PE", address:"Av. Eng. Domingos Ferreira, 4661 - Boa Viagem, Recife - PE", phone:"+55 (81) 3256-7700", email:"reservas.bgre@ahi.com.br", apartments:155, uFormat:40, salas:5, auditorio:200, amenities:[]},
+  {region:"Nordeste", brand:"Radisson", name:"Radisson Recife", city:"Recife", state:"PE", address:"Av. Boa Viagem, 1906 - Boa Viagem, Recife - PE", phone:"+55 (81) 3126-3020", email:"reservas.rdre@ahi.com.br", apartments:135, uFormat:54, salas:8, auditorio:200, amenities:[]},
+  {region:"Nordeste", brand:"The Coral Beach Resort by Atlantica", name:"The Coral Beach Resort by Atlantica", city:"Trairi", state:"CE", address:"Rua 01, S/N - lotes 3 e 4, Trairi - CE", phone:"+55 (85) 98128-1458", email:"reservas@thecoralbeachresort.com.br", apartments:61, uFormat:null, salas:null, auditorio:null, amenities:[]},
+
+  {region:"Norte", brand:"Comfort Hotel", name:"Comfort Hotel Manaus", city:"Manaus", state:"AM", address:"Av. Mandi, 263 - Distrito Industrial I, Manaus - AM", phone:"+55 (92) 3028-6056", email:"reservas.cmao@ahi.com.br", apartments:133, uFormat:70, salas:6, auditorio:300, amenities:[]},
+  {region:"Norte", brand:"Radisson", name:"Radisson Hotel Maiorana Jr Belém", city:"Belém", state:"PA", address:"Av. Cmte. Brás de Aguiar, 321 - Nazaré, Belém - PA", phone:"+55 (91) 3182-8797", email:"reservas.rbel@ahi.com.br", apartments:129, uFormat:50, salas:4, auditorio:250, amenities:[]},
+
+  {region:"Sudeste", brand:"Clarion", name:"Clarion Faria Lima", city:"São Paulo", state:"SP", address:"R. Jerônimo da Veiga, 248 - Jardim Europa, São Paulo - SP", phone:"+55 (11) 3709-0700", email:"reservas.clfl@ahi.com.br", apartments:81, uFormat:42, salas:2, auditorio:100, amenities:[]},
+  {region:"Sudeste", brand:"Radisson", name:"Radisson Paulista", city:"São Paulo", state:"SP", address:"Alameda Santos, 85 - Jardins, São Paulo - SP", phone:"+55 (11) 2627-1000", email:"reservas.rdpa@ahi.com.br", apartments:365, uFormat:60, salas:6, auditorio:300, amenities:[]},
+  {region:"Sudeste", brand:"Transamerica", name:"Transamerica Berrini", city:"São Paulo", state:"SP", address:"R. Quintana, 1012 - Brooklin Novo, São Paulo - SP", phone:"+55 (11) 5508-5000", email:"reservas.tber@ahi.com.br", apartments:147, uFormat:54, salas:11, auditorio:180, amenities:[]},
+  {region:"Sudeste", brand:"Cyan Resort by Atlantica", name:"Cyan Resort by Atlantica", city:"Itupeva", state:"SP", address:"Estrada Joaquim Bueno Neto, 6701 - Bairro Rio Abaixo, Itupeva - SP", phone:"+55 (11) 2136-5300", email:"reservas.cyan@ahi.com.br", apartments:220, uFormat:72, salas:16, auditorio:450, amenities:[]},
+  {region:"Sudeste", brand:"Wyndham", name:"Wyndham São Paulo Berrini", city:"São Paulo", state:"SP", address:"R. Heinrich Hertz, 14 - Cidade Monções, São Paulo - SP", phone:"+55 (11) 4210-2203", email:"reservas.wbsp@ahi.com.br", apartments:147, uFormat:26, salas:4, auditorio:80, amenities:[]},
+
+  {region:"Sul", brand:"Transamerica Collection", name:"Art. Hotel Transamerica Collection", city:"Porto Alegre", state:"RS", address:"Av. Cel. Lucas de Oliveira, 995 - Bela Vista, Porto Alegre - RS", phone:"+55 (51) 3737-9817", email:"reservas.ahtc@ahi.com.br", apartments:131, uFormat:16, salas:3, auditorio:40, amenities:[]},
+  {region:"Sul", brand:"DoubleTree by Hilton", name:"DoubleTree by Hilton Porto Alegre", city:"Porto Alegre", state:"RS", address:"Av. Padre Cacique, 2703 - Cristal, Porto Alegre - RS", phone:"+55 (51) 2042-0265", email:"reservas.dpoa@ahi.com.br", apartments:141, uFormat:30, salas:1, auditorio:60, amenities:[]},
+  {region:"Sul", brand:"Radisson", name:"Radisson Hotel Curitiba", city:"Curitiba", state:"PR", address:"Av. Sete de Setembro, 5190 - Batel, Curitiba - PR", phone:"+55 (41) 3351-2222", email:"reservas1@hcchotels.com.br", apartments:191, uFormat:45, salas:7, auditorio:400, amenities:[]},
+
+  {region:"Residencial", brand:"Radisson Serviced Apartments", name:"Radisson Serviced Apartments Jardins", city:"São Paulo", state:"SP", address:"Rua Itapeva, 342 - Bela Vista, São Paulo - SP", phone:"+55 (11) 98868-5700", email:"atendimentoresidences@ahi.com.br", apartments:37, uFormat:null, salas:null, auditorio:null, amenities:["academia","loja_conveniencia"]},
+  {region:"Residencial", brand:"Roomo Transamerica", name:"Roomo Transamerica SP Pinheiros", city:"São Paulo", state:"SP", address:"R. Cunha Gago, 83 - Pinheiros, São Paulo - SP", phone:"+55 (11) 98868-5700", email:"atendimentoresidences@ahi.com.br", apartments:null, uFormat:null, salas:null, auditorio:null, amenities:["coworking","academia","lavanderia","loja_conveniencia","bicicletario","piscina"]},
+];
+
+const BRAND_COLORS = {
+  "Laranja escuro": "#ed7d31",
+  "Laranja claro": "#ffab7b",
+  "Azul claro": "#00b5e2",
+  "Azul escuro": "#263142",
+  "Cinza escuro": "#6e6e6e",
+  "Cinza claro": "#dbdbd3",
+  "Branco": "#ffffff",
+  "Preto": "#000000"
+};
+
+const SETTINGS_DEFAULT = {
+  fullHeaderImageUrl: "",
+  logoBrand: "ATLANTICA",
+  logoSub: "HOSPITALITY INTERNATIONAL",
+  fullLogoImageUrl: "",
+  heroTitle: "Presentes em todas as regiões do Brasil",
+  showBars: true,
+  bar1Color: BRAND_COLORS["Laranja escuro"],
+  bar2Color: BRAND_COLORS["Azul claro"],
+  heroBannerUrl: "",
+  sheetCsvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8fug0ecqLbCqiFjlW6A--HpBio6e24IZWclJIo4tVD5I43ep4iKtlL75iocWFQ9k-ozNF5SAMeZN9/pub?gid=1939095860&single=true&output=csv"
+};
+
+// Colunas esperadas na planilha (cabeçalho na primeira linha), com nomes alternativos aceitos
+const FIELD_ALIASES = {
+  region: ["regiao"],
+  brand: ["bandeira","marca"],
+  name: ["nome","empreendimento","hotel"],
+  city: ["cidade"],
+  state: ["uf","estado"],
+  address: ["endereco","enderecocompleto"],
+  phone: ["telefone","fone"],
+  email: ["email","emaildereservas"],
+  apartments: ["apartamentos","quartos","apto","apartamento"],
+  uFormat: ["formatou","capacidadeformatou","uformat","capacidadesalaeventosu","capacidadesaladeeventosu"],
+  salas: ["salas","salasdeevento","salasdeeventos"],
+  auditorio: ["auditorio","lugaresnoauditorio","lugauditorio","lugaresauditorio"],
+  amenities: ["comodidades","amenidades"],
+  photoUrl: ["fotourl","foto","linkdafoto","urldafoto"]
+};
+
+let settings = {...SETTINGS_DEFAULT};
+
+function preloadImage(url){
+  return new Promise(resolve=>{
+    if(!url){ resolve(false); return; }
+    const img = new Image();
+    img.onload = ()=>resolve(true);
+    img.onerror = ()=>resolve(false);
+    img.src = url;
+  });
+}
+
+const DEFAULT_MARK_SVG = `<svg viewBox="0 0 620 420" fill="none">
+  <rect x="52" y="43" width="517" height="323" rx="95" ry="95" stroke="currentColor" stroke-width="26"/>
+  <polygon points="94,302 135,302 283,106 242,106" fill="currentColor"/>
+  <line x1="323" y1="106" x2="323" y2="302" stroke="currentColor" stroke-width="32"/>
+  <line x1="489" y1="106" x2="489" y2="302" stroke="currentColor" stroke-width="32"/>
+  <line x1="323" y1="204" x2="489" y2="204" stroke="currentColor" stroke-width="32"/>
+</svg>`;
+
+async function applySettings(){
+  const topbar = document.getElementById('topbarEl');
+  const hero = document.getElementById('heroSection');
+  const customBlock = document.getElementById('customHeaderBlock');
+
+  // ---- Cabeçalho completo como imagem única (substitui tudo: logo, título, barras) ----
+  if(settings.fullHeaderImageUrl){
+    const ok = await preloadImage(settings.fullHeaderImageUrl);
+    if(ok){
+      document.getElementById('customHeaderImg').src = settings.fullHeaderImageUrl;
+      customBlock.style.display = 'block';
+      topbar.style.display = 'none';
+      hero.style.display = 'none';
+      return; // não precisa configurar mais nada do cabeçalho codificado
+    }else{
+      customBlock.style.display = 'none';
+      topbar.style.display = '';
+      hero.style.display = '';
+      if(editMode) showToast('Não consegui carregar a imagem do cabeçalho — mantive o cabeçalho padrão. Confira se o link/arquivo é válido.');
+    }
+  }else{
+    customBlock.style.display = 'none';
+    topbar.style.display = '';
+    hero.style.display = '';
+  }
+
+  document.getElementById('heroTitleEl').textContent = settings.heroTitle;
+
+  // ---- Logo: full custom image OR default mark + text ----
+  const logoSlot = document.getElementById('logoSlot');
+  if(settings.fullLogoImageUrl){
+    const ok = await preloadImage(settings.fullLogoImageUrl);
+    if(ok){
+      logoSlot.innerHTML = `<img src="${settings.fullLogoImageUrl}" alt="Logo Atlantica" style="height:36px;max-width:220px;object-fit:contain;">`;
+    }else{
+      logoSlot.innerHTML = defaultLogoHtml();
+      if(editMode) showToast('Não consegui carregar a imagem da logo — mantive a marca padrão. Confira se o link é público e direto para a imagem.');
+    }
+  }else{
+    logoSlot.innerHTML = defaultLogoHtml();
+  }
+
+  // ---- Hero: custom banner image OR coded diagonal bars ----
+  const stripes = document.getElementById('heroStripes');
+  if(settings.heroBannerUrl){
+    const ok = await preloadImage(settings.heroBannerUrl);
+    if(ok){
+      hero.style.backgroundImage = `linear-gradient(135deg, rgba(38,49,66,.82), rgba(27,36,49,.88)), url('${settings.heroBannerUrl}')`;
+      hero.style.backgroundSize = 'cover';
+      hero.style.backgroundPosition = 'center';
+      stripes.style.display = 'none';
+    }else{
+      hero.style.backgroundImage = '';
+      stripes.style.display = 'block';
+      if(editMode) showToast('Não consegui carregar a imagem de fundo do topo — mantive as barras padrão. Confira se o link é público e direto para a imagem.');
+    }
+  }else{
+    hero.style.backgroundImage = '';
+    stripes.style.display = 'block';
+  }
+  const b1 = document.getElementById('heroBar1'), b2 = document.getElementById('heroBar2');
+  b1.style.display = settings.showBars ? 'block' : 'none';
+  b2.style.display = settings.showBars ? 'block' : 'none';
+  b1.style.background = settings.bar1Color;
+  b2.style.background = settings.bar2Color;
+}
+
+function defaultLogoHtml(){
+  return `<div class="logo-mark">${DEFAULT_MARK_SVG}</div>
+    <div class="logo-text">
+      <b>${settings.logoBrand}</b>
+      <span>${settings.logoSub}</span>
+    </div>`;
+}
+
+// Em algumas plataformas de hospedagem window.storage já vem pronto (armazenamento persistente da própria página).
+// Fora delas (arquivo aberto direto, GitHub Pages, servidor comum etc.) essa API não existe — sem isso, todo
+// "Salvar" ficaria travado com erro silencioso no console. Este substituto guarda os dados no localStorage do navegador.
+if(!window.storage){
+  window.storage = {
+    get: async (key)=>{
+      const v = localStorage.getItem(key);
+      if(v===null) throw new Error('not-found');
+      return {value: v};
+    },
+    set: async (key, value)=>{ localStorage.setItem(key, value); },
+    delete: async (key)=>{ localStorage.removeItem(key); }
+  };
+}
+
+let hotels = [];
+let amenities = [];
+let editMode = false;
+let activeRegion = "Todas";
+let activeAmenityFilters = new Set();
+let searchTerm = "";
+let pickedEmoji = EMOJI_OPTIONS[0];
+let lastSyncAt = null;
+let lastSyncError = null;
+let lastSheetFingerprint = null;
+
+async function loadData(){
+  try{
+    const h = await window.storage.get('ahi_hotels_cache', true);
+    hotels = JSON.parse(h.value);
+  }catch(e){
+    hotels = FALLBACK_HOTELS.map(h => ({...h, id: 'seed_'+slugify(h.name)}));
+  }
+  try{
+    const a = await window.storage.get('ahi_amenities_v2', true);
+    amenities = JSON.parse(a.value);
+  }catch(e){
+    amenities = DEFAULT_AMENITIES;
+    await window.storage.set('ahi_amenities_v2', JSON.stringify(amenities), true);
+  }
+  try{
+    const s = await window.storage.get('ahi_settings', true);
+    settings = {...SETTINGS_DEFAULT, ...JSON.parse(s.value)};
+  }catch(e){
+    settings = {...SETTINGS_DEFAULT};
+    await window.storage.set('ahi_settings', JSON.stringify(settings), true);
+  }
+}
+async function cacheHotels(){ await window.storage.set('ahi_hotels_cache', JSON.stringify(hotels), true); }
+async function persistAmenities(){ await window.storage.set('ahi_amenities_v2', JSON.stringify(amenities), true); }
+async function persistSettings(){ await window.storage.set('ahi_settings', JSON.stringify(settings), true); }
+
+// Converte links comuns de compartilhamento (Google Drive) em links de imagem direta
+function normalizePhotoUrl(url){
+  if(!url) return url;
+  url = url.trim();
+  let driveId = null;
+  const driveFile = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/);
+  const driveOpen = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+  const driveUc = url.match(/drive\.google\.com\/uc\?(?:export=view&)?id=([^&]+)/);
+  const bareId = url.match(/^[a-zA-Z0-9_-]{20,}$/); // usuário colou só o código do arquivo, sem link
+  if(driveFile) driveId = driveFile[1];
+  else if(driveOpen) driveId = driveOpen[1];
+  else if(driveUc) driveId = driveUc[1];
+  else if(bareId) driveId = bareId[0];
+  if(driveId) return `https://lh3.googleusercontent.com/d/${driveId}`;
+  return url;
+}
+
+function amenityById(id){ return amenities.find(a=>a.id===id); }
+
+function slugify(s){
+  const base = (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_+|_+$/g,'').slice(0,60);
+  return base || ('h'+Math.random().toString(36).slice(2,8));
+}
+
+// ---------- LEITURA DA PLANILHA (Google Sheets publicado como CSV) ----------
+function parseCSV(text){
+  const rows = [];
+  let row = [], field = '', inQuotes = false;
+  for(let i=0;i<text.length;i++){
+    const c = text[i];
+    if(inQuotes){
+      if(c === '"'){
+        if(text[i+1] === '"'){ field += '"'; i++; }
+        else inQuotes = false;
+      }else field += c;
+    }else{
+      if(c === '"') inQuotes = true;
+      else if(c === ','){ row.push(field); field=''; }
+      else if(c === '\r'){ /* ignora, \n cuida da quebra de linha */ }
+      else if(c === '\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+      else field += c;
+    }
+  }
+  if(field.length || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r => r.some(cell => cell.trim() !== ''));
+}
+
+function normalizeKey(s){
+  return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+
+function resolveAmenityId(label){
+  const norm = normalizeKey(label);
+  const found = amenities.find(a => normalizeKey(a.label) === norm);
+  if(found) return {id: found.id, created:false};
+  const id = 'am_' + norm.slice(0,30) + '_' + Math.random().toString(36).slice(2,5);
+  amenities.push({id, label: label.trim(), icon:'⭐'});
+  return {id, created:true};
+}
+
+function mapCsvToHotels(text){
+  const rows = parseCSV(text);
+  if(!rows.length) return [];
+  const header = rows[0].map(normalizeKey);
+  const colIndex = {};
+  Object.entries(FIELD_ALIASES).forEach(([field, aliases])=>{
+    const idx = header.findIndex(h => aliases.includes(h));
+    if(idx !== -1) colIndex[field] = idx;
+  });
+  const get = (row, field) => colIndex[field] !== undefined ? (row[colIndex[field]] || '').trim() : '';
+  const num = v => { v = (v||'').trim().replace(',','.'); if(v==='') return null; const n = Number(v); return isNaN(n) ? null : n; };
+
+  let amenitiesChanged = false;
+  const result = [];
+  for(let i=1;i<rows.length;i++){
+    const row = rows[i];
+    const name = get(row,'name');
+    if(!name) continue;
+    const address = get(row,'address');
+    let city = get(row,'city'), state = get(row,'state').toUpperCase();
+    if(!city && !state){
+      const guess = guessCityStateFromAddress(address);
+      city = guess.city; state = guess.state;
+    }
+    const amenitiesRaw = get(row,'amenities');
+    const amenityIds = amenitiesRaw ? amenitiesRaw.split(/[;,]/).map(s=>s.trim()).filter(Boolean).map(label=>{
+      const r = resolveAmenityId(label);
+      if(r.created) amenitiesChanged = true;
+      return r.id;
+    }) : [];
+    result.push({
+      id: 'sheet_' + slugify(name + '_' + city),
+      region: get(row,'region') || 'Outras',
+      brand: get(row,'brand'), name,
+      city, state,
+      address, phone: get(row,'phone'), email: get(row,'email'),
+      apartments: num(get(row,'apartments')), uFormat: num(get(row,'uFormat')),
+      salas: num(get(row,'salas')), auditorio: num(get(row,'auditorio')),
+      amenities: amenityIds,
+      photoUrl: normalizePhotoUrl(get(row,'photoUrl'))
+    });
+  }
+  if(amenitiesChanged) persistAmenities();
+  return result;
+}
+
+// Quando a planilha não tem colunas separadas de Cidade/UF, tenta extrair do fim do endereço (ex: "..., Belo Horizonte - MG")
+function guessCityStateFromAddress(address){
+  const m = (address||'').match(/,\s*([^,]+?)\s*-\s*([A-Za-z]{2})\s*$/);
+  return m ? {city: m[1].trim(), state: m[2].toUpperCase()} : {city:'', state:''};
+}
+
+async function syncHotelsFromSheet(opts={}){
+  const url = (settings.sheetCsvUrl||'').trim();
+  if(!url){ lastSyncError = 'not-configured'; renderSyncStatus(); return; }
+  try{
+    const res = await fetch(url, {cache:'no-store'});
+    if(!res.ok) throw new Error('http-'+res.status);
+    const text = await res.text();
+    const parsed = mapCsvToHotels(text);
+    const fingerprint = JSON.stringify(parsed);
+    const changed = fingerprint !== lastSheetFingerprint;
+    lastSheetFingerprint = fingerprint;
+    lastSyncAt = new Date();
+    lastSyncError = null;
+    if(changed){
+      hotels = parsed;
+      await cacheHotels();
+      renderChips();
+      renderMain();
+      if(!opts.initial) showToast('Catálogo atualizado a partir da planilha.');
+    }
+  }catch(e){
+    lastSyncError = e.message;
+    console.warn('Falha ao sincronizar com a planilha:', e);
+  }
+  renderSyncStatus();
+}
+
+function renderSyncStatus(){
+  const el = document.getElementById('syncStatus');
+  if(!el) return;
+  if(!(settings.sheetCsvUrl||'').trim()){
+    el.innerHTML = `⚠️ Planilha não conectada — exibindo dados de exemplo.` + (editMode ? ` <button class="chip" style="padding:3px 12px;font-size:11.5px;" onclick="openDataSourceManager()">Conectar planilha</button>` : '');
+    return;
+  }
+  if(lastSyncError){
+    el.innerHTML = `⚠️ Não consegui atualizar a partir da planilha agora (mostrando os últimos dados carregados). <button class="chip" style="padding:3px 12px;font-size:11.5px;" onclick="syncHotelsFromSheet()">Tentar novamente</button>`;
+    return;
+  }
+  const time = lastSyncAt ? lastSyncAt.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}) : '—';
+  el.innerHTML = `🔄 Sincronizado com a planilha às ${time} <button class="chip" style="padding:3px 12px;font-size:11.5px;" onclick="syncHotelsFromSheet()">Atualizar agora</button>`;
+}
+
+function getAllRegions(){
+  const extra = Array.from(new Set(hotels.map(h=>h.region).filter(r=>r && !REGIONS.includes(r))));
+  return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
+}
+
+// ---------- IMAGE UPLOAD (direto do computador, sem link) — usado no editor visual ----------
+// Lê o arquivo, redimensiona e comprime no navegador antes de guardar como texto (base64)
+function readAndCompressImage(file, maxWidth=1100, quality=0.72){
+  return new Promise((resolve,reject)=>{
+    if(!file.type.startsWith('image/')){ reject(new Error('not-an-image')); return; }
+    const reader = new FileReader();
+    reader.onload = (e)=>{
+      const img = new Image();
+      img.onload = ()=>{
+        let w = img.width, h = img.height;
+        if(w > maxWidth){ h = Math.round(h * (maxWidth / w)); w = maxWidth; }
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.onerror = ()=>reject(new Error('img-load-failed'));
+      img.src = e.target.result;
+    };
+    reader.onerror = ()=>reject(new Error('read-failed'));
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderChips(){
+  const regionChips = document.getElementById('regionChips');
+  const chips = ["Todas", ...getAllRegions()];
+  regionChips.innerHTML = chips.map(r => `<button class="chip ${activeRegion===r?'active':''}" data-region="${r}">${r}</button>`).join('');
+  regionChips.querySelectorAll('.chip').forEach(el=>{
+    el.onclick = ()=>{ activeRegion = el.dataset.region; renderChips(); renderMain(); };
+  });
+
+  const amenityChips = document.getElementById('amenityChips');
+  amenityChips.innerHTML = amenities.map(a => `<button class="chip amenity ${activeAmenityFilters.has(a.id)?'active':''}" data-am="${a.id}">${a.icon} ${a.label}</button>`).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
+  amenityChips.querySelectorAll('.chip').forEach(el=>{
+    el.onclick = ()=>{
+      const id = el.dataset.am;
+      if(activeAmenityFilters.has(id)) activeAmenityFilters.delete(id); else activeAmenityFilters.add(id);
+      renderChips(); renderMain();
+    };
+  });
+}
+
+function filteredHotels(){
+  return hotels.filter(h=>{
+    if(activeRegion!=="Todas" && h.region!==activeRegion) return false;
+    if(searchTerm){
+      const hay = (h.name+' '+h.city+' '+h.brand+' '+h.state).toLowerCase();
+      if(!hay.includes(searchTerm.toLowerCase())) return false;
+    }
+    if(activeAmenityFilters.size>0){
+      for(const id of activeAmenityFilters){ if(!h.amenities.includes(id)) return false; }
+    }
+    return true;
+  });
+}
+
+function capacityMiniHtml(h){
+  const parts = [];
+  if(h.apartments) parts.push(`<span>🛏️ ${h.apartments} apto${h.apartments>1?'s':''}</span>`);
+  if(h.salas) parts.push(`<span>🗂️ ${h.salas} sala${h.salas>1?'s':''}</span>`);
+  if(h.auditorio) parts.push(`<span>🎪 ${h.auditorio} lug.</span>`);
+  return parts.join('');
+}
+
+function cardHtml(h){
+  const initials = h.name.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase();
+  const amChips = h.amenities.slice(0,4).map(id=>{
+    const a = amenityById(id); if(!a) return '';
+    return `<span class="amenity-pill">${a.icon} ${a.label}</span>`;
+  }).join('');
+  const extra = h.amenities.length>4 ? `<span class="amenity-pill">+${h.amenities.length-4}</span>` : '';
+  const amenityBlock = h.amenities.length ? amChips+extra : (editMode ? `<span class="amenity-pill muted">Sem comodidades cadastradas</span>` : '');
+  const location = [h.city, h.state].filter(Boolean).join(' - ');
+  return `
+  <div class="card">
+    <div class="card-photo">
+      ${h.photoUrl ? `<img src="${h.photoUrl}" alt="${h.name}">` : `<div class="stripe"></div><span class="mono">${initials}</span>`}
+      ${h.brand ? `<span class="brand-tag">${h.brand}</span>` : ''}
+    </div>
+    <div class="card-body">
+      <h3>${h.name}</h3>
+      ${location ? `<div class="location">📍 ${location}</div>` : ''}
+      <div class="capacity-mini">${capacityMiniHtml(h) || '<span class="hint">Capacidade não informada</span>'}</div>
+      <div class="amenity-row">${amenityBlock}</div>
+      <div class="card-actions">
+        <button class="btn btn-primary" onclick="openDetail('${h.id}')">Ver detalhes</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderMain(){
+  const main = document.getElementById('mainContent');
+  const list = filteredHotels();
+  const regionsToShow = activeRegion==="Todas" ? getAllRegions() : [activeRegion];
+  let html = '';
+  regionsToShow.forEach(region=>{
+    const items = list.filter(h=>h.region===region);
+    if(activeRegion==="Todas" && items.length===0) return;
+    html += `<div class="region-section">
+      <div class="region-head"><div class="bar"></div><h2>${region}</h2><span class="count">${items.length} empreendimento${items.length!==1?'s':''}</span></div>
+      ${items.length ? `<div class="cards-grid">${items.map(cardHtml).join('')}</div>` : `<div class="empty-region">Nenhum empreendimento encontrado com os filtros atuais.</div>`}
+    </div>`;
+  });
+  if(!html) html = `<div class="empty-region" style="padding:60px 0;text-align:center;font-size:15px;">Nenhum resultado. Tente limpar a busca ou os filtros.</div>`;
+  main.innerHTML = html;
+}
+
+// ---------- DETAIL MODAL ----------
+function openDetail(id){
+  const h = hotels.find(x=>x.id===id); if(!h) return;
+  const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(h.address);
+  const amList = h.amenities.map(id=>{ const a=amenityById(id); return a ? `<span class="amenity-pill">${a.icon} ${a.label}</span>` : ''; }).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
+  document.getElementById('detailModal').innerHTML = `
+    <div class="modal-header">
+      <div>
+        <span class="hint">${[h.brand, h.region].filter(Boolean).join(' · ')}</span>
+        <h2>${h.name}</h2>
+      </div>
+      <button class="modal-close" onclick="closeOverlay('detailOverlay')">×</button>
+    </div>
+    <div class="modal-body">
+      ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}">` : ''}
+      <div class="detail-grid">
+        <div class="detail-stat"><b>${h.apartments ?? '—'}</b><span>Apartamentos</span></div>
+        <div class="detail-stat"><b>${h.uFormat ?? '—'}</b><span>Formato "U"</span></div>
+        <div class="detail-stat"><b>${h.salas ?? '—'}</b><span>Salas</span></div>
+        <div class="detail-stat"><b>${h.auditorio ?? '—'}</b><span>Lug. auditório</span></div>
+      </div>
+      <div class="detail-row"><span class="ico">📍</span><span>${h.address} — <a href="${mapUrl}" target="_blank" rel="noopener">ver no mapa</a></span></div>
+      <div class="detail-row"><span class="ico">📞</span><a href="tel:${h.phone.replace(/[^\d+]/g,'')}">${h.phone}</a></div>
+      <div class="detail-row"><span class="ico">✉️</span><a href="mailto:${h.email}">${h.email}</a></div>
+      <div>
+        <p class="toolbar-label">Comodidades</p>
+        <div class="detail-amenities">${amList}</div>
+      </div>
+    </div>`;
+  document.getElementById('detailOverlay').classList.add('show');
+}
+
+// ---------- AMENITY MANAGER ----------
+function openAmenityManager(){
+  pickedEmoji = EMOJI_OPTIONS[0];
+  renderAmenityManagerModal();
+  document.getElementById('amenityOverlay').classList.add('show');
+}
+function renderAmenityManagerModal(){
+  const rows = amenities.map(a=>`
+    <div class="amenity-manager-row">
+      <span class="em">${a.icon}</span><span class="lb">${a.label}</span>
+      <button class="icon-btn danger" onclick="removeAmenity('${a.id}')" title="Remover">🗑</button>
+    </div>`).join('') || '<p class="hint">Nenhuma comodidade cadastrada ainda.</p>';
+  const emojiPicker = EMOJI_OPTIONS.map(e=>`<button class="emoji-opt ${e===pickedEmoji?'sel':''}" onclick="pickEmoji('${e}')">${e}</button>`).join('');
+  document.getElementById('amenityModal').innerHTML = `
+    <div class="modal-header">
+      <h2>Gerenciar comodidades</h2>
+      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="hint">Essas são as comodidades disponíveis para marcar em cada empreendimento. Adicione quantas quiser.</p>
+      <div class="amenity-manager-list">${rows}</div>
+      <div style="border-top:1px solid #eee;padding-top:16px;">
+        <p class="toolbar-label">Adicionar nova comodidade</p>
+        <div class="add-amenity-row">
+          <div class="field" style="flex:1;"><label>Nome</label><input id="newAmenityLabel" placeholder="Ex: Vista para o mar"></div>
+          <button class="btn btn-primary" onclick="addAmenity()">Adicionar</button>
+        </div>
+        <p class="hint" style="margin-top:10px;">Escolha um ícone:</p>
+        <div class="emoji-pick">${emojiPicker}</div>
+      </div>
+    </div>`;
+}
+function pickEmoji(e){ pickedEmoji = e; renderAmenityManagerModal(); }
+async function addAmenity(){
+  const label = document.getElementById('newAmenityLabel').value.trim();
+  if(!label){ showToast('Dê um nome para a comodidade.'); return; }
+  const id = 'am_' + label.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'_').slice(0,30) + '_' + Math.random().toString(36).slice(2,5);
+  amenities.push({id, label, icon: pickedEmoji});
+  await persistAmenities();
+  renderAmenityManagerModal();
+  renderChips();
+  showToast('Comodidade adicionada.');
+}
+function removeAmenity(id){
+  showConfirm('Remover esta comodidade da lista? Ela deixará de aparecer nos empreendimentos que a usam.', async ()=>{
+    amenities = amenities.filter(a=>a.id!==id);
+    activeAmenityFilters.delete(id);
+    await persistAmenities();
+    renderAmenityManagerModal();
+    renderChips();
+    renderMain();
+    showToast('Comodidade removida.');
+  });
+}
+
+// ---------- EDIT MODE ----------
+// ---------- VISUAL SETTINGS ----------
+async function handleVisualFileChange(event, inputId, previewId){
+  const file = event.target.files[0];
+  if(!file) return;
+  const preview = document.getElementById(previewId);
+  preview.innerHTML = `<p class="hint">Processando imagem...</p>`;
+  try{
+    const dataUrl = await readAndCompressImage(file, 1400, 0.78);
+    document.getElementById(inputId).value = dataUrl;
+    preview.innerHTML = `<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
+      <img src="${dataUrl}" style="width:70px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--gray-light);">
+      <span style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Pronta para salvar</span>
+    </div>`;
+  }catch(e){
+    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;">✕ Não consegui ler esse arquivo. Tente outra imagem (jpg, png).</p>`;
+  }
+}
+
+function openVisualManager(){
+  const colorOptions = (selected) => Object.entries(BRAND_COLORS).map(([name,hex])=>
+    `<option value="${hex}" ${selected===hex?'selected':''}>${name}</option>`).join('');
+  document.getElementById('amenityModal').innerHTML = `
+    <div class="modal-header">
+      <h2>Editar visual</h2>
+      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field full" style="background:#fff3ea;border:1.5px solid var(--orange-light);border-radius:10px;padding:14px;">
+          <label>Cabeçalho completo (imagem pronta com logo, título e barras)</label>
+          <input type="file" id="v_fullHeaderFile" accept="image/*" onchange="handleVisualFileChange(event,'v_fullHeader','v_fullHeaderPreview')">
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input id="v_fullHeader" value="${settings.fullHeaderImageUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
+            <button type="button" class="btn btn-ghost" onclick="testImageField('v_fullHeader','v_fullHeaderPreview')">Testar link</button>
+          </div>
+          <span class="hint">Envie a arte pronta do time de design (recomendado: pelo menos 1600px de largura). Se preencher isso, os campos de logo, banner, título e barras abaixo são <b>ignorados</b> — só a busca continua funcionando, embaixo da imagem. Deixe em branco para usar o cabeçalho padrão montado pela página.</span>
+          <div id="v_fullHeaderPreview"></div>
+        </div>
+        <div class="field full">
+          <label>Logo (imagem completa, com marca e nome)</label>
+          <input type="file" id="v_fullLogoFile" accept="image/*" onchange="handleVisualFileChange(event,'v_fullLogo','v_fullLogoPreview')">
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input id="v_fullLogo" value="${settings.fullLogoImageUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
+            <button type="button" class="btn btn-ghost" onclick="testImageField('v_fullLogo','v_fullLogoPreview')">Testar link</button>
+          </div>
+          <span class="hint">Usado apenas se o campo acima (cabeçalho completo) estiver vazio. Deixe tudo em branco para usar a logo oficial da Atlantica.</span>
+          <div id="v_fullLogoPreview"></div>
+        </div>
+        <div class="field full">
+          <label>Imagem de fundo do topo (banner)</label>
+          <input type="file" id="v_heroBannerFile" accept="image/*" onchange="handleVisualFileChange(event,'v_heroBanner','v_heroBannerPreview')">
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <input id="v_heroBanner" value="${settings.heroBannerUrl}" placeholder="ou cole aqui um link direto para a imagem" style="flex:1;">
+            <button type="button" class="btn btn-ghost" onclick="testImageField('v_heroBanner','v_heroBannerPreview')">Testar link</button>
+          </div>
+          <span class="hint">Se preencher, substitui as barras diagonais como fundo do topo. Deixe em branco para manter as barras.</span>
+          <div id="v_heroBannerPreview"></div>
+        </div>
+        <div class="field full"><label>Título principal (hero)</label><input id="v_heroTitle" value="${settings.heroTitle}"></div>
+        <div class="field"><label>Cor da 1ª barra</label><select id="v_bar1">${colorOptions(settings.bar1Color)}</select></div>
+        <div class="field"><label>Cor da 2ª barra</label><select id="v_bar2">${colorOptions(settings.bar2Color)}</select></div>
+        <label class="checkbox-item full" style="grid-column:1/-1;">
+          <input type="checkbox" id="v_showBars" ${settings.showBars?'checked':''}> Mostrar as barras diagonais (ignorado se houver imagem de fundo)
+        </label>
+      </div>
+      <p class="hint">As barras seguem sempre o ângulo oficial da marca (37°) e não têm cantos arredondados — só a cor e a exibição são editáveis, para não fugir do manual.</p>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="resetVisualSettings()">Restaurar padrão</button>
+        <button class="btn btn-primary" onclick="saveVisualSettings()">Salvar visual</button>
+      </div>
+    </div>`;
+  document.getElementById('amenityOverlay').classList.add('show');
+  // testa automaticamente os links já salvos, se houver
+  if(settings.fullHeaderImageUrl) testImageField('v_fullHeader','v_fullHeaderPreview');
+  if(settings.fullLogoImageUrl) testImageField('v_fullLogo','v_fullLogoPreview');
+  if(settings.heroBannerUrl) testImageField('v_heroBanner','v_heroBannerPreview');
+}
+
+async function testImageField(inputId, previewId){
+  const url = document.getElementById(inputId).value.trim();
+  const preview = document.getElementById(previewId);
+  if(!url){ preview.innerHTML = ''; return; }
+  preview.innerHTML = `<p class="hint">Testando link...</p>`;
+  const normalized = normalizePhotoUrl(url);
+  const ok = await preloadImage(normalized);
+  if(ok){
+    preview.innerHTML = `<div style="margin-top:8px;display:flex;align-items:center;gap:10px;">
+      <img src="${normalized}" style="width:70px;height:50px;object-fit:cover;border-radius:6px;border:1px solid var(--gray-light);">
+      <span style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Link carregou normalmente</span>
+    </div>`;
+  }else{
+    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;margin-top:6px;line-height:1.5;">
+      ✕ Não consegui carregar essa imagem. <a href="${normalized}" target="_blank" rel="noopener" style="color:#d9534f;">Clique aqui para abrir o link direto numa aba nova</a> — se pedir login ou der erro de acesso, o arquivo ainda não está público; se abrir a imagem normalmente, é o Google Drive bloqueando o carregamento dentro de outras páginas (acontece mesmo com arquivo público).<br><br>
+      Se continuar sem funcionar, o caminho mais confiável é subir a foto em um serviço feito pra isso, como <a href="https://imgbb.com" target="_blank" rel="noopener" style="color:#d9534f;text-decoration:underline;">imgbb.com</a> (gratuito, sem precisar de conta) — ele te dá um link direto que funciona sempre.
+    </p>`;
+  }
+  return ok;
+}
+
+async function saveVisualSettings(){
+  const fullHeader = normalizePhotoUrl(document.getElementById('v_fullHeader').value.trim());
+  const fullLogo = normalizePhotoUrl(document.getElementById('v_fullLogo').value.trim());
+  const heroBanner = normalizePhotoUrl(document.getElementById('v_heroBanner').value.trim());
+  settings = {
+    ...settings,
+    fullHeaderImageUrl: fullHeader,
+    fullLogoImageUrl: fullLogo,
+    heroBannerUrl: heroBanner,
+    heroTitle: document.getElementById('v_heroTitle').value.trim() || SETTINGS_DEFAULT.heroTitle,
+    bar1Color: document.getElementById('v_bar1').value,
+    bar2Color: document.getElementById('v_bar2').value,
+    showBars: document.getElementById('v_showBars').checked
+  };
+  await persistSettings();
+  await applySettings();
+  closeOverlay('amenityOverlay');
+  showToast('Visual salvo. Se algum link não carregou, a área correspondente volta ao padrão da marca.');
+}
+async function resetVisualSettings(){
+  settings = {...SETTINGS_DEFAULT, sheetCsvUrl: settings.sheetCsvUrl};
+  await persistSettings();
+  await applySettings();
+  closeOverlay('amenityOverlay');
+  showToast('Visual restaurado ao padrão da marca.');
+}
+
+// ---------- DATA SOURCE (planilha) ----------
+function openDataSourceManager(){
+  document.getElementById('amenityModal').innerHTML = `
+    <div class="modal-header">
+      <h2>Conectar planilha de hotéis</h2>
+      <button class="modal-close" onclick="closeOverlay('amenityOverlay')">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="hint" style="line-height:1.6;">
+        A lista de empreendimentos vem de uma planilha do Google Sheets. Para conectar:<br>
+        1. A primeira linha da planilha deve ter os cabeçalhos: <b>Região, Hotel, Endereço, Telefone, Email, Apartamentos, Capacidade Sala Eventos (U), Salas de Eventos, Lugares no Auditório</b> — igual ao que já está montado hoje.<br>
+        &nbsp;&nbsp;Cidade e UF são detectados automaticamente a partir do fim do endereço (ex: "..., Belo Horizonte - MG"). Se quiser, também pode adicionar colunas opcionais de <b>Bandeira</b>, <b>Comodidades</b> (nomes separados por vírgula ou ponto e vírgula — cria a comodidade automaticamente se ainda não existir) e <b>Foto URL</b>.<br>
+        2. No Sheets: Arquivo → Compartilhar → Publicar na Web → escolha a aba → formato <b>CSV</b> → Publicar.<br>
+        3. Cole o link gerado abaixo.
+      </p>
+      <div class="field full">
+        <label>Link CSV publicado</label>
+        <input id="ds_url" value="${settings.sheetCsvUrl||''}" placeholder="https://docs.google.com/spreadsheets/d/e/.../pub?output=csv">
+      </div>
+      <div id="ds_preview"></div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="testDataSourceUrl()">Testar link</button>
+        <button class="btn btn-primary" onclick="saveDataSourceUrl()">Salvar</button>
+      </div>
+    </div>`;
+  document.getElementById('amenityOverlay').classList.add('show');
+}
+
+async function testDataSourceUrl(){
+  const url = document.getElementById('ds_url').value.trim();
+  const preview = document.getElementById('ds_preview');
+  if(!url){ preview.innerHTML = ''; return; }
+  preview.innerHTML = `<p class="hint">Testando link...</p>`;
+  try{
+    const res = await fetch(url, {cache:'no-store'});
+    if(!res.ok) throw new Error('http-'+res.status);
+    const text = await res.text();
+    const parsed = mapCsvToHotels(text);
+    preview.innerHTML = `<p style="color:#2e7d32;font-size:12.5px;font-weight:600;">✓ Link funcionando — ${parsed.length} empreendimento${parsed.length!==1?'s':''} encontrado${parsed.length!==1?'s':''} na planilha.</p>`;
+  }catch(e){
+    preview.innerHTML = `<p style="color:#d9534f;font-size:12.5px;">✕ Não consegui ler essa planilha. Confira se o link foi gerado por "Publicar na web" com formato CSV e se a aba está correta.</p>`;
+  }
+}
+
+async function saveDataSourceUrl(){
+  settings.sheetCsvUrl = document.getElementById('ds_url').value.trim();
+  await persistSettings();
+  closeOverlay('amenityOverlay');
+  showToast('Link da planilha salvo. Sincronizando...');
+  await syncHotelsFromSheet();
+}
+
+function toggleEditMode(){
+  if(!editMode){
+    showPasswordPrompt();
+  }else{
+    editMode = false;
+    document.getElementById('editToggleBtn').classList.remove('active');
+    document.getElementById('editToggleBtn').textContent = 'acesso da equipe';
+    document.getElementById('manageAmenitiesBtn').style.display = 'none';
+    document.getElementById('manageVisualBtn').style.display = 'none';
+    document.getElementById('manageDataBtn').style.display = 'none';
+    renderMain();
+    renderSyncStatus();
+    showToast('Modo de edição desativado.');
+  }
+}
+function activateEditMode(){
+  editMode = true;
+  document.getElementById('editToggleBtn').classList.add('active');
+  document.getElementById('editToggleBtn').textContent = 'modo edição ativo';
+  document.getElementById('manageAmenitiesBtn').style.display = 'block';
+  document.getElementById('manageVisualBtn').style.display = 'block';
+  document.getElementById('manageDataBtn').style.display = 'block';
+  renderMain();
+  renderSyncStatus();
+  showToast('Modo de edição ativado.');
+}
+
+function closeOverlay(id){ document.getElementById(id).classList.remove('show'); }
+
+// ---------- CUSTOM UI: toast / confirm / password (replacements for alert/confirm/prompt, which are blocked in this environment) ----------
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 2600);
+}
+
+function showConfirm(message, onConfirm){
+  document.getElementById('confirmModal').innerHTML = `
+    <div class="modal-body" style="padding-top:26px;">
+      <p style="font-size:15px;line-height:1.5;">${message}</p>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeOverlay('confirmOverlay')">Cancelar</button>
+        <button class="btn btn-primary" id="confirmYesBtn" style="background:#d9534f;">Confirmar</button>
+      </div>
+    </div>`;
+  document.getElementById('confirmOverlay').classList.add('show');
+  document.getElementById('confirmYesBtn').onclick = ()=>{ closeOverlay('confirmOverlay'); onConfirm(); };
+}
+
+function showPasswordPrompt(){
+  document.getElementById('passwordModal').innerHTML = `
+    <div class="modal-header"><h2>Acesso da equipe</h2><button class="modal-close" onclick="closeOverlay('passwordOverlay')">×</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Senha</label><input type="password" id="passwordInput" placeholder="Digite a senha"></div>
+      <p class="hint" id="passwordError" style="color:#d9534f;display:none;">Senha incorreta. Tente novamente.</p>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeOverlay('passwordOverlay')">Cancelar</button>
+        <button class="btn btn-primary" id="passwordSubmitBtn">Entrar</button>
+      </div>
+    </div>`;
+  document.getElementById('passwordOverlay').classList.add('show');
+  const input = document.getElementById('passwordInput');
+  input.focus();
+  const submit = ()=>{
+    if(input.value === EDIT_PASSWORD){
+      closeOverlay('passwordOverlay');
+      activateEditMode();
+    }else{
+      document.getElementById('passwordError').style.display = 'block';
+    }
+  };
+  document.getElementById('passwordSubmitBtn').onclick = submit;
+  input.onkeydown = (e)=>{ if(e.key==='Enter') submit(); };
+}
+
+// ---------- INIT ----------
+document.querySelectorAll('.overlay').forEach(ov=>{
+  ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('show'); });
+});
+document.getElementById('editToggleBtn').onclick = toggleEditMode;
+document.getElementById('manageAmenitiesBtn').onclick = openAmenityManager;
+document.getElementById('manageVisualBtn').onclick = openVisualManager;
+document.getElementById('manageDataBtn').onclick = openDataSourceManager;
+document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.value; document.getElementById('searchInput2').value = e.target.value; renderMain(); };
+document.getElementById('searchInput2').oninput = (e)=>{ searchTerm = e.target.value; document.getElementById('searchInput').value = e.target.value; renderMain(); };
+
+(async function init(){
+  await loadData();
+  await applySettings();
+  renderChips();
+  renderMain();
+  await syncHotelsFromSheet({initial:true});
+  setInterval(()=>syncHotelsFromSheet(), 60000);
+})();
+</script>
+</body>
+</html>
