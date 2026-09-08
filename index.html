@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Reforço: alguns hosts (ex.: blocos de HTML customizado em plataformas de landing page) descartam
+     tags <link> do <head>, mas preservam o conteúdo de <style>. Este @import garante que a fonte
+     carregue mesmo nesses casos (o <link> acima continua sendo o carregamento "principal", mais rápido). */
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
   :root{
     --navy:#263142;
     --navy-2:#1b2431;
