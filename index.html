@@ -87,9 +87,12 @@
   #ahi-catalogo .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:20px;}
   #ahi-catalogo .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s;position:relative;}
   #ahi-catalogo .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(38,49,66,.16);}
-  #ahi-catalogo .card-photo{height:132px;background:linear-gradient(135deg,var(--navy),#3a4a63);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  #ahi-catalogo .card-photo{height:132px !important;background:linear-gradient(135deg,var(--navy),#3a4a63);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
   #ahi-catalogo .card-photo.has-photo{cursor:zoom-in;}
-  #ahi-catalogo .card-photo img{width:100%;height:100%;object-fit:cover;object-position:center;}
+  /* !important abaixo: alguns hosts (ex.: ActiveCampaign) aplicam um reset genérico de <img>
+     (tipo "toda imagem vira responsiva: height:auto") que vence até seletores com #id — sem
+     isso, a foto perde a altura fixa e cada card fica com uma proporção diferente. */
+  #ahi-catalogo .card-photo img{width:100% !important;height:100% !important;object-fit:cover !important;object-position:center !important;}
   #ahi-catalogo .card-photo .mono{font-family:'Outfit',sans-serif;font-size:34px;font-weight:700;color:rgba(255,255,255,.35);}
   #ahi-catalogo .card-photo .stripe{position:absolute;width:34px;height:220%;background:var(--orange-dark);transform:skewX(-37deg);right:26px;top:-60%;}
   #ahi-catalogo .brand-tag{position:absolute;top:10px;left:10px;background:rgba(255,255,255,.92);color:var(--navy);font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:4px 9px;border-radius:6px;text-transform:uppercase;}
@@ -114,7 +117,7 @@
   #ahi-catalogo .modal-header h2{font-size:19px;}
   #ahi-catalogo .modal-close{background:none;border:none;font-size:22px;color:var(--gray-dark);line-height:1;padding:4px;}
   #ahi-catalogo .modal-body{padding:22px 24px 28px;display:flex;flex-direction:column;gap:18px;}
-  #ahi-catalogo .detail-photo{width:100%;height:180px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover;object-position:center;cursor:zoom-in;}
+  #ahi-catalogo .detail-photo{width:100% !important;height:180px !important;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover !important;object-position:center !important;cursor:zoom-in;}
 
   /* ---------- LIGHTBOX (foto inteira, sem corte) ---------- */
   #ahi-catalogo .lightbox-frame{position:relative;display:inline-block;max-width:92vw;max-height:88vh;}
