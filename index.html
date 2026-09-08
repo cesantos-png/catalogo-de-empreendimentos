@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Reforço: alguns hosts (ex.: blocos de HTML customizado em plataformas de landing page) descartam
+     tags <link> do <head>, mas preservam o conteúdo de <style>. Este @import garante que a fonte
+     carregue mesmo nesses casos (o <link> acima continua sendo o carregamento "principal", mais rápido). */
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
   :root{
     --navy:#263142;
     --navy-2:#1b2431;
@@ -80,6 +84,7 @@
   .card{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .15s, box-shadow .15s;position:relative;}
   .card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(38,49,66,.16);}
   .card-photo{height:132px;background:linear-gradient(135deg,var(--navy),#3a4a63);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .card-photo.has-photo{cursor:zoom-in;}
   .card-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
   .card-photo .mono{font-family:'Outfit',sans-serif;font-size:34px;font-weight:700;color:rgba(255,255,255,.35);}
   .card-photo .stripe{position:absolute;width:34px;height:220%;background:var(--orange-dark);transform:skewX(-37deg);right:26px;top:-60%;}
@@ -105,7 +110,11 @@
   .modal-header h2{font-size:19px;}
   .modal-close{background:none;border:none;font-size:22px;color:var(--gray-dark);line-height:1;padding:4px;}
   .modal-body{padding:22px 24px 28px;display:flex;flex-direction:column;gap:18px;}
-  .detail-photo{width:100%;height:180px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover;object-position:center top;}
+  .detail-photo{width:100%;height:180px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover;object-position:center top;cursor:zoom-in;}
+
+  /* ---------- LIGHTBOX (foto inteira, sem corte) ---------- */
+  .lightbox-img{max-width:92vw;max-height:88vh;display:block;border-radius:10px;box-shadow:var(--shadow-lg);object-fit:contain;}
+  .lightbox-close{position:absolute;top:18px;right:22px;background:rgba(20,26,36,.6);color:#fff;border:none;width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;}
   .detail-row{display:flex;gap:10px;font-size:14px;align-items:flex-start;}
   .detail-row .ico{width:20px;text-align:center;flex-shrink:0;margin-top:1px;}
   .detail-row a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--orange-dark);}
@@ -173,6 +182,12 @@
   <div class="modal" id="detailModal"></div>
 </div>
 
+<!-- PHOTO LIGHTBOX (foto inteira, sem corte) -->
+<div class="overlay" id="photoOverlay">
+  <button class="lightbox-close" onclick="closeOverlay('photoOverlay')">×</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
+
 <footer>
   Catálogo interno · <b>Atlantica Hospitality International</b> · dados mantidos pelo time comercial
 </footer>
@@ -182,13 +197,18 @@
 
 <script>
 // ---------- CONFIGURAÇÃO (edite aqui direto no código — não há mais painel de edição na página) ----------
-const REGIONS = ["Centro-Oeste","Nordeste","Norte","Sudeste","Sul","Residencial"];
+const REGIONS = ["Centro-Oeste","Nordeste","Norte","Sudeste","Sul"];
+// Valores da coluna "Região" que não devem aparecer como card/aba no site, mesmo se vierem preenchidos na planilha
+const HIDDEN_REGIONS = ["Residencial"];
 const LOGO_BRAND = "ATLANTICA";
 const LOGO_SUB = "HOSPITALITY INTERNATIONAL";
 // Aceita link direto de imagem OU link de compartilhamento do Google Drive (convertido automaticamente). Deixe "" para usar a marca padrão (ícone + texto).
 const LOGO_IMAGE_URL = "https://drive.google.com/file/d/1LfX2z5tfCOmrxV4S58ZvRlucQM74xtj6/view?usp=drive_link"; //https://drive.google.com/file/d/1LfX2z5tfCOmrxV4S58ZvRlucQM74xtj6/view?usp=drive_link
 // Link publicado como CSV (Google Sheets: Arquivo → Compartilhar → Publicar na Web → formato CSV)
 const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR8fug0ecqLbCqiFjlW6A--HpBio6e24IZWclJIo4tVD5I43ep4iKtlL75iocWFQ9k-ozNF5SAMeZN9/pub?gid=1939095860&single=true&output=csv";
+// De quanto em quanto tempo a página busca novidades na planilha (em ms). O próprio Google também guarda um cache
+// do link publicado por alguns minutos, então diminuir muito este valor nem sempre acelera a atualização.
+const SYNC_INTERVAL_MS = 20000;
 
 const DEFAULT_AMENITIES = [
   {id:"estacionamento", label:"Estacionamento", icon:"🅿️"},
@@ -471,7 +491,7 @@ function renderSyncStatus(){
 }
 
 function getAllRegions(){
-  const extra = Array.from(new Set(hotels.map(h=>h.region).filter(r=>r && !REGIONS.includes(r))));
+  const extra = Array.from(new Set(hotels.map(h=>h.region).filter(r=>r && !REGIONS.includes(r) && !HIDDEN_REGIONS.includes(r))));
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
 }
 
@@ -526,7 +546,7 @@ function cardHtml(h){
   const location = [h.city, h.state].filter(Boolean).join(' - ');
   return `
   <div class="card">
-    <div class="card-photo">
+    <div class="card-photo${h.photoUrl ? ' has-photo' : ''}"${h.photoUrl ? ` onclick="openPhotoLightbox('${h.id}')"` : ''}>
       ${h.photoUrl ? `<img src="${h.photoUrl}" alt="${h.name}">` : `<div class="stripe"></div><span class="mono">${initials}</span>`}
       ${h.brand ? `<span class="brand-tag">${h.brand}</span>` : ''}
     </div>
@@ -573,7 +593,7 @@ function openDetail(id){
       <button class="modal-close" onclick="closeOverlay('detailOverlay')">×</button>
     </div>
     <div class="modal-body">
-      ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}">` : ''}
+      ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}" onclick="openPhotoLightbox('${h.id}')">` : ''}
       <div class="detail-grid">
         <div class="detail-stat"><b>${h.apartments ?? '—'}</b><span>Apartamentos</span></div>
         <div class="detail-stat"><b>${h.uFormat ?? '—'}</b><span>Formato "U"</span></div>
@@ -592,6 +612,14 @@ function openDetail(id){
 }
 
 function closeOverlay(id){ document.getElementById(id).classList.remove('show'); }
+
+function openPhotoLightbox(id){
+  const h = hotels.find(x=>x.id===id); if(!h || !h.photoUrl) return;
+  const img = document.getElementById('lightboxImg');
+  img.src = h.photoUrl;
+  img.alt = h.name;
+  document.getElementById('photoOverlay').classList.add('show');
+}
 
 function showToast(msg){
   const t = document.getElementById('toast');
@@ -614,7 +642,7 @@ document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.va
   renderChips();
   renderMain();
   await syncHotelsFromSheet({initial:true});
-  setInterval(()=>syncHotelsFromSheet(), 60000);
+  setInterval(()=>syncHotelsFromSheet(), SYNC_INTERVAL_MS);
 })();
 </script>
 </body>
