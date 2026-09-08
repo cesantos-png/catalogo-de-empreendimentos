@@ -113,8 +113,9 @@
   .detail-photo{width:100%;height:180px;border-radius:10px;background:linear-gradient(135deg,var(--navy),#3a4a63);object-fit:cover;object-position:center top;cursor:zoom-in;}
 
   /* ---------- LIGHTBOX (foto inteira, sem corte) ---------- */
-  .lightbox-img{max-width:92vw;max-height:88vh;display:block;border-radius:10px;box-shadow:var(--shadow-lg);object-fit:contain;}
-  .lightbox-close{position:absolute;top:18px;right:22px;background:rgba(20,26,36,.6);color:#fff;border:none;width:38px;height:38px;border-radius:50%;font-size:22px;line-height:1;}
+  .lightbox-frame{position:relative;display:inline-block;max-width:92vw;max-height:88vh;}
+  .lightbox-img{display:block;max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:var(--shadow-lg);}
+  .lightbox-close{position:absolute;top:-16px;right:-16px;background:rgba(20,26,36,.85);color:#fff;border:none;width:36px;height:36px;border-radius:50%;font-size:20px;line-height:1;box-shadow:0 2px 8px rgba(0,0,0,.3);}
   .detail-row{display:flex;gap:10px;font-size:14px;align-items:flex-start;}
   .detail-row .ico{width:20px;text-align:center;flex-shrink:0;margin-top:1px;}
   .detail-row a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--orange-dark);}
@@ -184,8 +185,10 @@
 
 <!-- PHOTO LIGHTBOX (foto inteira, sem corte) -->
 <div class="overlay" id="photoOverlay">
-  <button class="lightbox-close" onclick="closeOverlay('photoOverlay')">×</button>
-  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-frame">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <button class="lightbox-close" onclick="closeOverlay('photoOverlay')">×</button>
+  </div>
 </div>
 
 <footer>
@@ -633,6 +636,10 @@ function showToast(msg){
 // ---------- INIT ----------
 document.querySelectorAll('.overlay').forEach(ov=>{
   ov.addEventListener('click', e=>{ if(e.target===ov) ov.classList.remove('show'); });
+});
+document.addEventListener('keydown', e=>{
+  if(e.key !== 'Escape') return;
+  document.querySelectorAll('.overlay.show').forEach(ov=>ov.classList.remove('show'));
 });
 document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.value; renderMain(); };
 
