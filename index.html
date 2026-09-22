@@ -206,7 +206,6 @@
 </footer>
 
 <!-- TOAST -->
-<div id="toast" style="position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13.5px;box-shadow:var(--shadow-lg);z-index:200;opacity:0;pointer-events:none;transition:.2s;"></div>
 
 <script>
 // ---------- CONFIGURAÇÃO (edite aqui direto no código — não há mais painel de edição na página) ----------
@@ -484,7 +483,6 @@ async function syncHotelsFromSheet(opts={}){
       renderBrands();
       renderChips();
       renderMain();
-      if(!opts.initial) showToast('Catálogo atualizado a partir da planilha.');
     }
   }catch(e){
     lastSyncError = e.message;
@@ -667,15 +665,6 @@ function openPhotoLightbox(id){
   img.src = h.photoUrl;
   img.alt = h.name;
   document.getElementById('photoOverlay').classList.add('show');
-}
-
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.opacity = '1';
-  t.style.transform = 'translateX(-50%) translateY(0)';
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; }, 2600);
 }
 
 // ---------- INIT ----------
