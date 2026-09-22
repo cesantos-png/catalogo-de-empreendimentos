@@ -119,7 +119,9 @@
   .detail-row{display:flex;gap:10px;font-size:14px;align-items:flex-start;}
   .detail-row .ico{width:20px;text-align:center;flex-shrink:0;margin-top:1px;}
   .detail-row a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--orange-dark);}
-  .detail-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+  .detail-section{display:flex;flex-direction:column;gap:8px;}
+  .detail-section .toolbar-label{margin:0;}
+  .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
   .detail-stat{background:#f6f6f4;border-radius:8px;padding:10px 8px;text-align:center;}
   .detail-stat b{display:block;font-family:'Outfit',sans-serif;font-size:19px;}
   .detail-stat span{font-size:10.5px;color:var(--gray-dark);}
@@ -130,7 +132,6 @@
   footer b{color:#fff;}
 
   @media(max-width:640px){
-    .detail-grid{grid-template-columns:repeat(2,1fr);}
     .topbar-inner{flex-wrap:wrap;}
     .searchbox{order:3;max-width:100%;width:100%;}
   }
@@ -506,7 +507,7 @@ function renderChips(){
   });
 
   const amenityChips = document.getElementById('amenityChips');
-  amenityChips.innerHTML = amenities.map(a => `<button class="chip amenity ${activeAmenityFilters.has(a.id)?'active':''}" data-am="${a.id}">${a.icon} ${a.label}</button>`).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
+  amenityChips.innerHTML = [...amenities].sort((a,b)=>a.label.localeCompare(b.label,'pt-BR',{sensitivity:'base'})).map(a => `<button class="chip amenity ${activeAmenityFilters.has(a.id)?'active':''}" data-am="${a.id}">${a.icon} ${a.label}</button>`).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
   amenityChips.querySelectorAll('.chip').forEach(el=>{
     el.onclick = ()=>{
       const id = el.dataset.am;
@@ -586,6 +587,9 @@ function openDetail(id){
   const h = hotels.find(x=>x.id===id); if(!h) return;
   const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(h.address);
   const amList = h.amenities.map(id=>{ const a=amenityById(id); return a ? `<span class="amenity-pill">${a.icon} ${a.label}</span>` : ''; }).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
+  const eventStats = [[h.uFormat,'Salas em formato "U"'],[h.salas,'Salas'],[h.auditorio,'Lug. auditório']]
+    .filter(([v]) => v != null && v !== '')
+    .map(([v,label]) => `<div class="detail-stat"><b>${v}</b><span>${label}</span></div>`).join('');
   document.getElementById('detailModal').innerHTML = `
     <div class="modal-header">
       <div>
@@ -596,16 +600,18 @@ function openDetail(id){
     </div>
     <div class="modal-body">
       ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}" onclick="openPhotoLightbox('${h.id}')">` : ''}
-      <div class="detail-grid">
-        <div class="detail-stat"><b>${h.apartments ?? '—'}</b><span>Apartamentos</span></div>
-        <div class="detail-stat"><b>${h.uFormat ?? '—'}</b><span>Formato "U"</span></div>
-        <div class="detail-stat"><b>${h.salas ?? '—'}</b><span>Salas</span></div>
-        <div class="detail-stat"><b>${h.auditorio ?? '—'}</b><span>Lug. auditório</span></div>
+      <div class="detail-section">
+        <p class="toolbar-label">Hospedagem</p>
+        ${h.apartments != null ? `<div class="detail-row"><span class="ico">🛏️</span><span>${h.apartments} apartamentos</span></div>` : ''}
+        <div class="detail-row"><span class="ico">📍</span><span>${h.address} — <a href="${mapUrl}" target="_blank" rel="noopener">ver no mapa</a></span></div>
+        <div class="detail-row"><span class="ico">📞</span><a href="tel:${h.phone.replace(/[^\d+]/g,'')}">${h.phone}</a></div>
+        <div class="detail-row"><span class="ico">✉️</span><a href="mailto:${h.email}">${h.email}</a></div>
       </div>
-      <div class="detail-row"><span class="ico">📍</span><span>${h.address} — <a href="${mapUrl}" target="_blank" rel="noopener">ver no mapa</a></span></div>
-      <div class="detail-row"><span class="ico">📞</span><a href="tel:${h.phone.replace(/[^\d+]/g,'')}">${h.phone}</a></div>
-      <div class="detail-row"><span class="ico">✉️</span><a href="mailto:${h.email}">${h.email}</a></div>
-      <div>
+      ${eventStats ? `<div class="detail-section">
+        <p class="toolbar-label">Eventos</p>
+        <div class="detail-grid">${eventStats}</div>
+      </div>` : ''}
+      <div class="detail-section">
         <p class="toolbar-label">Comodidades</p>
         <div class="detail-amenities">${amList}</div>
       </div>
