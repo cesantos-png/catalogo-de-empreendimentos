@@ -624,6 +624,10 @@ function openDetail(id){
     </div>
     <div class="modal-body">
       ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}" onclick="openPhotoLightbox('${h.id}')">` : ''}
+      ${eventStats ? `<div class="detail-section">
+        <p class="toolbar-label">Eventos</p>
+        <div class="detail-grid">${eventStats}</div>
+      </div>` : ''}
       <div class="detail-section">
         <p class="toolbar-label">Hospedagem</p>
         ${h.apartments != null ? `<div class="detail-row"><span class="ico">🛏️</span><span>${h.apartments} apartamentos</span></div>` : ''}
@@ -631,10 +635,6 @@ function openDetail(id){
         <div class="detail-row"><span class="ico">📞</span><a href="tel:${h.phone.replace(/[^\d+]/g,'')}">${h.phone}</a></div>
         <div class="detail-row"><span class="ico">✉️</span><a href="mailto:${h.email}">${h.email}</a></div>
       </div>
-      ${eventStats ? `<div class="detail-section">
-        <p class="toolbar-label">Eventos</p>
-        <div class="detail-grid">${eventStats}</div>
-      </div>` : ''}
       <div class="detail-section">
         <p class="toolbar-label">Comodidades</p>
         <div class="detail-amenities">${amList}</div>
