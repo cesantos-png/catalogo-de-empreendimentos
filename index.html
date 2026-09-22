@@ -119,17 +119,12 @@
   .detail-row{display:flex;gap:10px;font-size:14px;align-items:flex-start;}
   .detail-row .ico{width:20px;text-align:center;flex-shrink:0;margin-top:1px;}
   .detail-row a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--orange-dark);}
-  .detail-panel{position:relative;overflow:hidden;background:#d5dce4;border-radius:10px;padding:22px 18px;display:grid;grid-template-columns:repeat(2,1fr);gap:20px 12px;}
-  .detail-panel:has(> .detail-stat:only-child){grid-template-columns:1fr;}
-  .detail-panel::before,.detail-panel::after{content:"";position:absolute;width:70px;height:7px;background:var(--orange-dark);transform:rotate(-40deg);}
-  .detail-panel::before{top:10px;right:-18px;}
-  .detail-panel::after{bottom:10px;left:-18px;}
-  .detail-stat{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;color:var(--navy);}
-  .detail-stat svg{width:34px;height:34px;margin-bottom:4px;}
-  .detail-stat b{font-family:'Outfit',sans-serif;font-size:24px;line-height:1.1;}
-  .detail-stat span{font-size:11px;color:var(--navy);max-width:130px;}
-  .detail-contact{border-top:1px solid #eee;padding-top:16px;display:flex;flex-direction:column;gap:8px;}
-  .detail-contact .email{font-weight:700;font-style:italic;}
+  .detail-section{display:flex;flex-direction:column;gap:8px;}
+  .detail-section .toolbar-label{margin:0;}
+  .detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .detail-stat{background:#f6f6f4;border-radius:8px;padding:10px 8px;text-align:center;}
+  .detail-stat b{display:block;font-family:'Outfit',sans-serif;font-size:19px;}
+  .detail-stat span{font-size:10.5px;color:var(--gray-dark);}
   .detail-amenities{display:flex;flex-wrap:wrap;gap:8px;}
   .hint{font-size:12px;color:var(--gray-dark);}
 
@@ -588,27 +583,13 @@ function renderMain(){
 }
 
 // ---------- DETAIL MODAL ----------
-const DETAIL_ICONS = (() => {
-  const svg = d => `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
-  return {
-    bed: svg('<path d="M4 38V12M4 30h40v8M44 30v-6a6 6 0 0 0-6-6H22v12"/><circle cx="13" cy="22" r="4"/>'),
-    uformat: svg('<circle cx="10" cy="10" r="3"/><circle cx="24" cy="10" r="3"/><circle cx="38" cy="10" r="3"/><path d="M5 20a5 5 0 0 1 10 0M19 20a5 5 0 0 1 10 0M33 20a5 5 0 0 1 10 0"/><path d="M8 26v14h32V26"/><path d="M14 26v8h20v-8"/>'),
-    door: svg('<rect x="12" y="6" width="24" height="36" rx="1"/><path d="M6 42h36"/><circle cx="30" cy="25" r="1.5" fill="currentColor"/>'),
-    auditorium: svg('<circle cx="12" cy="10" r="3"/><circle cx="24" cy="10" r="3"/><circle cx="36" cy="10" r="3"/><path d="M6 20a6 6 0 0 1 12 0M18 20a6 6 0 0 1 12 0M30 20a6 6 0 0 1 12 0"/><circle cx="18" cy="28" r="3"/><circle cx="30" cy="28" r="3"/><path d="M12 38a6 6 0 0 1 12 0M24 38a6 6 0 0 1 12 0"/>'),
-  };
-})();
-
 function openDetail(id){
   const h = hotels.find(x=>x.id===id); if(!h) return;
   const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(h.address);
   const amList = h.amenities.map(id=>{ const a=amenityById(id); return a ? `<span class="amenity-pill">${a.icon} ${a.label}</span>` : ''; }).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
-  const statsHtml = [
-    [h.apartments, 'apartamentos', 'bed'],
-    [h.uFormat, 'Capacidade da Sala de Eventos em formato "U"', 'uformat'],
-    [h.salas, 'salas', 'door'],
-    [h.auditorio, 'lugares no auditório', 'auditorium'],
-  ].filter(([v]) => v != null && v !== '')
-   .map(([v, label, icon]) => `<div class="detail-stat">${DETAIL_ICONS[icon]}<b>${v}</b><span>${label}</span></div>`).join('');
+  const eventStats = [[h.uFormat,'Salas em formato "U"'],[h.salas,'Salas'],[h.auditorio,'Lug. auditório']]
+    .filter(([v]) => v != null && v !== '')
+    .map(([v,label]) => `<div class="detail-stat"><b>${v}</b><span>${label}</span></div>`).join('');
   document.getElementById('detailModal').innerHTML = `
     <div class="modal-header">
       <div>
@@ -619,15 +600,20 @@ function openDetail(id){
     </div>
     <div class="modal-body">
       ${h.photoUrl ? `<img class="detail-photo" src="${h.photoUrl}" alt="${h.name}" onclick="openPhotoLightbox('${h.id}')">` : ''}
-      ${statsHtml ? `<div class="detail-panel">${statsHtml}</div>` : ''}
-      <div>
-        <p class="toolbar-label">Comodidades</p>
-        <div class="detail-amenities">${amList}</div>
-      </div>
-      <div class="detail-contact">
+      <div class="detail-section">
+        <p class="toolbar-label">Hospedagem</p>
+        ${h.apartments != null ? `<div class="detail-row"><span class="ico">🛏️</span><span>${h.apartments} apartamentos</span></div>` : ''}
         <div class="detail-row"><span class="ico">📍</span><span>${h.address} — <a href="${mapUrl}" target="_blank" rel="noopener">ver no mapa</a></span></div>
         <div class="detail-row"><span class="ico">📞</span><a href="tel:${h.phone.replace(/[^\d+]/g,'')}">${h.phone}</a></div>
-        <div class="detail-row"><span class="ico">✉️</span><a class="email" href="mailto:${h.email}">${h.email}</a></div>
+        <div class="detail-row"><span class="ico">✉️</span><a href="mailto:${h.email}">${h.email}</a></div>
+      </div>
+      ${eventStats ? `<div class="detail-section">
+        <p class="toolbar-label">Eventos</p>
+        <div class="detail-grid">${eventStats}</div>
+      </div>` : ''}
+      <div class="detail-section">
+        <p class="toolbar-label">Comodidades</p>
+        <div class="detail-amenities">${amList}</div>
       </div>
     </div>`;
   document.getElementById('detailOverlay').classList.add('show');
