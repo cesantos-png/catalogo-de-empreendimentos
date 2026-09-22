@@ -506,7 +506,7 @@ function renderChips(){
   });
 
   const amenityChips = document.getElementById('amenityChips');
-  amenityChips.innerHTML = amenities.map(a => `<button class="chip amenity ${activeAmenityFilters.has(a.id)?'active':''}" data-am="${a.id}">${a.icon} ${a.label}</button>`).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
+  amenityChips.innerHTML = [...amenities].sort((a,b)=>a.label.localeCompare(b.label,'pt-BR',{sensitivity:'base'})).map(a => `<button class="chip amenity ${activeAmenityFilters.has(a.id)?'active':''}" data-am="${a.id}">${a.icon} ${a.label}</button>`).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
   amenityChips.querySelectorAll('.chip').forEach(el=>{
     el.onclick = ()=>{
       const id = el.dataset.am;
