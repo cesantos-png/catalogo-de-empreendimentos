@@ -508,8 +508,12 @@ function getAllRegions(){
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
 }
 
+// Marcas exibidas na faixa animada do topo. As bandeiras preenchidas na planilha são somadas a esta lista.
+const NETWORK_BRANDS = [...new Set([...FALLBACK_HOTELS.map(h => h.brand), "Go Inn", "Transamerica Executive"])];
+
 function renderBrands(){
-  const brands = [...new Set(hotels.map(h => (h.brand||'').trim()).filter(Boolean))]
+  const brands = [...new Map([...NETWORK_BRANDS, ...hotels.map(h => h.brand)]
+      .map(b => (b||'').trim()).filter(Boolean).map(b => [normalizeKey(b), b])).values()]
     .sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
   const track = document.getElementById('brandTrack');
   const key = brands.join('|');
