@@ -64,6 +64,7 @@
   .brand-track{display:flex;width:max-content;animation:brand-scroll var(--marquee-duration,60s) linear infinite;}
   .brand-marquee:hover .brand-track{animation-play-state:paused;}
   .brand-item{display:flex;align-items:center;white-space:nowrap;font-family:'Outfit',sans-serif;font-size:17px;font-weight:600;letter-spacing:.02em;color:#c7cfdb;}
+  .brand-item img{height:30px;width:auto;max-width:160px;object-fit:contain;display:block;filter:brightness(0) invert(1);opacity:.8;}
   .brand-item::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange-dark);margin:0 28px;}
   @keyframes brand-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
   @media (prefers-reduced-motion: reduce){.brand-track{animation:none;}}
@@ -508,8 +509,22 @@ function getAllRegions(){
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
 }
 
-// Marcas exibidas na faixa animada do topo, nesta ordem (lista fixa da fase de testes)
-const NETWORK_BRANDS = ["Radisson", "Choice", "Hilton", "Transamerica", "by Atlantica"];
+// Marcas exibidas na faixa animada do topo, nesta ordem (lista fixa da fase de testes).
+// logo: link do Google Drive (como em LOGO_IMAGE_URL) ou caminho de um arquivo no repositório.
+// Sem logo, ou se a imagem não carregar, aparece o nome da marca.
+const NETWORK_BRANDS = [
+  {name:"Radisson",     logo:""},
+  {name:"Choice",       logo:""},
+  {name:"Hilton",       logo:""},
+  {name:"Transamerica", logo:""},
+  {name:"by Atlantica", logo:""},
+];
+
+function brandItemHtml(b){
+  const url = normalizePhotoUrl(b.logo);
+  if(!url) return `<span class="brand-item">${b.name}</span>`;
+  return `<span class="brand-item"><img src="${url}" alt="${b.name}" onerror="this.replaceWith(this.alt)"></span>`;
+}
 
 function renderBrands(){
   const track = document.getElementById('brandTrack');
@@ -517,7 +532,7 @@ function renderBrands(){
   // Com poucas marcas, repete a lista para preencher telas largas sem buraco na faixa
   const reps = Math.ceil(15 / NETWORK_BRANDS.length);
   const half = Array.from({length: reps}, () => NETWORK_BRANDS).flat();
-  const items = half.map(b => `<span class="brand-item">${b}</span>`).join('');
+  const items = half.map(brandItemHtml).join('');
   // A faixa vai duplicada: a animação anda metade da largura e recomeça sem emenda visível
   track.innerHTML = items + `<span style="display:contents" aria-hidden="true">${items}</span>`;
   track.style.setProperty('--marquee-duration', half.length * 3.5 + 's');
