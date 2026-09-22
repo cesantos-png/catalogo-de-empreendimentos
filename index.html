@@ -508,22 +508,19 @@ function getAllRegions(){
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
 }
 
-// Marcas exibidas na faixa animada do topo. As bandeiras preenchidas na planilha são somadas a esta lista.
-const NETWORK_BRANDS = [...new Set([...FALLBACK_HOTELS.map(h => h.brand), "Go Inn", "Transamerica Executive"])];
+// Marcas exibidas na faixa animada do topo, nesta ordem (lista fixa da fase de testes)
+const NETWORK_BRANDS = ["Radisson", "Choice", "Hilton", "Transamerica", "by Atlantica"];
 
 function renderBrands(){
-  const brands = [...new Map([...NETWORK_BRANDS, ...hotels.map(h => h.brand)]
-      .map(b => (b||'').trim()).filter(Boolean).map(b => [normalizeKey(b), b])).values()]
-    .sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
   const track = document.getElementById('brandTrack');
-  const key = brands.join('|');
-  if(track.dataset.key === key) return;
-  track.dataset.key = key;
-  track.parentElement.hidden = !brands.length;
-  // A lista vai duplicada: a animação anda metade da largura e recomeça sem emenda visível
-  const items = brands.map(b => `<span class="brand-item">${b}</span>`).join('');
+  if(track.childElementCount) return;
+  // Com poucas marcas, repete a lista para preencher telas largas sem buraco na faixa
+  const reps = Math.ceil(15 / NETWORK_BRANDS.length);
+  const half = Array.from({length: reps}, () => NETWORK_BRANDS).flat();
+  const items = half.map(b => `<span class="brand-item">${b}</span>`).join('');
+  // A faixa vai duplicada: a animação anda metade da largura e recomeça sem emenda visível
   track.innerHTML = items + `<span style="display:contents" aria-hidden="true">${items}</span>`;
-  track.style.setProperty('--marquee-duration', Math.max(20, brands.length * 3.5) + 's');
+  track.style.setProperty('--marquee-duration', half.length * 3.5 + 's');
 }
 
 function renderChips(){
