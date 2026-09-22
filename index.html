@@ -59,6 +59,14 @@
   .stats-row{display:flex;flex-wrap:wrap;gap:36px;margin-top:40px;}
   .stat b{display:block;font-family:'Outfit',sans-serif;font-size:28px;font-weight:700;color:var(--orange-light);}
   .stat span{font-size:12.5px;color:#aab5c4;}
+  .brand-marquee{position:relative;z-index:1;margin:44px -24px 0;padding:16px 0;border-top:1px solid rgba(255,255,255,.08);overflow:hidden;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .brand-track{display:flex;width:max-content;animation:brand-scroll var(--marquee-duration,60s) linear infinite;}
+  .brand-marquee:hover .brand-track{animation-play-state:paused;}
+  .brand-item{display:flex;align-items:center;white-space:nowrap;font-family:'Outfit',sans-serif;font-size:17px;font-weight:600;letter-spacing:.02em;color:#c7cfdb;}
+  .brand-item::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--orange-dark);margin:0 28px;}
+  @keyframes brand-scroll{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @media (prefers-reduced-motion: reduce){.brand-track{animation:none;}}
 
   /* ---------- TOOLBAR ---------- */
   .toolbar{max-width:1280px;margin:-28px auto 0;padding:0 24px;position:relative;z-index:2;}
@@ -160,6 +168,7 @@
       <div class="stat"><b>+28k</b><span>quartos</span></div>
     </div>
   </div>
+  <div class="brand-marquee" aria-label="Marcas da rede"><div class="brand-track" id="brandTrack"></div></div>
 </div>
 
 <div class="toolbar">
@@ -471,6 +480,7 @@ async function syncHotelsFromSheet(opts={}){
     if(changed){
       hotels = parsed;
       await cacheHotels();
+      renderBrands();
       renderChips();
       renderMain();
       if(!opts.initial) showToast('Catálogo atualizado a partir da planilha.');
@@ -496,6 +506,20 @@ function renderSyncStatus(){
 function getAllRegions(){
   const extra = Array.from(new Set(hotels.map(h=>h.region).filter(r=>r && !REGIONS.includes(r) && !HIDDEN_REGIONS.includes(r))));
   return [...REGIONS, ...extra.sort((a,b)=>a.localeCompare(b,'pt-BR'))];
+}
+
+function renderBrands(){
+  const brands = [...new Set(hotels.map(h => (h.brand||'').trim()).filter(Boolean))]
+    .sort((a,b)=>a.localeCompare(b,'pt-BR',{sensitivity:'base'}));
+  const track = document.getElementById('brandTrack');
+  const key = brands.join('|');
+  if(track.dataset.key === key) return;
+  track.dataset.key = key;
+  track.parentElement.hidden = !brands.length;
+  // A lista vai duplicada: a animação anda metade da largura e recomeça sem emenda visível
+  const items = brands.map(b => `<span class="brand-item">${b}</span>`).join('');
+  track.innerHTML = items + `<span style="display:contents" aria-hidden="true">${items}</span>`;
+  track.style.setProperty('--marquee-duration', Math.max(20, brands.length * 3.5) + 's');
 }
 
 function renderChips(){
@@ -651,6 +675,7 @@ document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.va
 (async function init(){
   await loadData();
   await applyLogo();
+  renderBrands();
   renderChips();
   renderMain();
   await syncHotelsFromSheet({initial:true});
