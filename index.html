@@ -590,7 +590,8 @@ function capacityMiniHtml(h){
   const parts = [];
   if(h.apartments) parts.push(`<span>🛏️ ${h.apartments} apto${h.apartments>1?'s':''}</span>`);
   if(h.salas) parts.push(`<span>🗂️ ${h.salas} sala${h.salas>1?'s':''}</span>`);
-  if(h.auditorio) parts.push(`<span>🎪 ${h.auditorio} lug.</span>`);
+  if(h.auditorio) parts.push(`<span>🎪 ${h.auditorio} lug. auditório</span>`);
+  if(h.uFormat) parts.push(`<span>🪑 ${h.uFormat} lug. formato "U"</span>`);
   return parts.join('');
 }
 
