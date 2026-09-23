@@ -643,7 +643,7 @@ function openDetail(id){
   const h = hotels.find(x=>x.id===id); if(!h) return;
   const mapUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(h.address);
   const amList = h.amenities.map(id=>{ const a=amenityById(id); return a ? `<span class="amenity-pill">${a.icon} ${a.label}</span>` : ''; }).join('') || '<span class="hint">Nenhuma comodidade cadastrada ainda.</span>';
-  const eventStats = [[h.uFormat,'Salas em formato "U"'],[h.salas,'Salas'],[h.auditorio,'Lug. auditório']]
+  const eventStats = [[h.uFormat,'Lug. formato "U"'],[h.salas,'Salas'],[h.auditorio,'Lug. auditório']]
     .filter(([v]) => v != null && v !== '')
     .map(([v,label]) => `<div class="detail-stat"><b>${v}</b><span>${label}</span></div>`).join('');
   document.getElementById('detailModal').innerHTML = `
